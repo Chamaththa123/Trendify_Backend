@@ -1,0 +1,124 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #F0EFF5;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #ffffff;
+  font-weight: 500;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+   border-top-right-radius: 50px; 
+  border-bottom-right-radius: 50px;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 13px;
+  padding-left: 20px;
+  color: #64728C;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+ 
+.sidebar a.active {
+  background-color: #2a3577;
+  color: white;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #dbdeee;
+  color: #4d5970;
+  border-radius: 5px;
+  /* margin: 10px; */
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+.sidebar img {
+  width: 160px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header{
+  background-color: #2a3577;
+  color: white;
+  padding-left: 80px;
+}
+
+.sub-header {
+  background-color: #ffffff;
+  padding:10px 0px 10px 80px;
+  display: flex;
+  align-items: center;
+}
+
+.main-path{
+  font-size: 25px;
+  padding:18px 0px 18px 0px;
+  font-weight: 500;
+}
+
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.sub-header-back {
+  background-color: #F6FBFF;
+  color: #64728C;
+  padding: 7px 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+.sub-header-path {
+  background-color: #F6FBFF;
+  color: #64728C;
+  padding: 7px 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+.sub-header-path-active{
+  background-color: #ecefff;
+  color: #2a3577;
+  padding: 7px 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+.rounded-card{
+  border-radius: 10px;
+}
