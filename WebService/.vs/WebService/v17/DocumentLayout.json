@@ -3,32 +3,36 @@
   "WorkspaceRootPath": "E:\\My Project\\EAD_Project\\WebService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\productlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\productlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\controllers\\productlistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\controllers\\productlistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,97 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Program.cs",
-              "RelativeDocumentMoniker": "WebService\\Program.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Program.cs",
-              "RelativeToolTip": "WebService\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABYAAAA9AAAA",
+              "DocumentIndex": 1,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "WebService\\Models\\LoginRequest.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\LoginRequest.cs",
+              "RelativeToolTip": "WebService\\Models\\LoginRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T14:18:06.661Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProductListsController.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductListsController.cs",
-              "RelativeDocumentMoniker": "WebService\\Controllers\\ProductListsController.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductListsController.cs",
-              "RelativeToolTip": "WebService\\Controllers\\ProductListsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T14:07:10.629Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "WebService\\Controllers\\ProductsController.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "WebService\\Controllers\\ProductsController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAFAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T14:07:04.592Z",
+              "WhenOpened": "2024-09-14T21:09:04.7Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Product.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "WebService\\Models\\Product.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
-              "RelativeToolTip": "WebService\\Models\\Product.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAIwCYAAAAxAAAA",
+              "Title": "UserService.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "WebService\\Services\\UserService.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\UserService.cs",
+              "RelativeToolTip": "WebService\\Services\\UserService.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T14:05:57.626Z",
+              "WhenOpened": "2024-09-14T20:24:29.923Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductListService.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductListService.cs",
-              "RelativeDocumentMoniker": "WebService\\Services\\ProductListService.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductListService.cs",
-              "RelativeToolTip": "WebService\\Services\\ProductListService.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAABMAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T13:59:07.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ProductService.cs",
               "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductService.cs",
               "RelativeDocumentMoniker": "WebService\\Services\\ProductService.cs",
               "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductService.cs",
               "RelativeToolTip": "WebService\\Services\\ProductService.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAIwE4AAAAbAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T13:58:53.84Z",
+              "WhenOpened": "2024-09-14T20:24:25.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\appsettings.json",
+              "RelativeDocumentMoniker": "WebService\\appsettings.json",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\appsettings.json",
+              "RelativeToolTip": "WebService\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-14T19:39:36.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "WebService\\Controllers\\UsersController.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "WebService\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAAC8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T19:19:00.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Interfaces\\IUserService.cs",
+              "RelativeDocumentMoniker": "WebService\\Interfaces\\IUserService.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Interfaces\\IUserService.cs",
+              "RelativeToolTip": "WebService\\Interfaces\\IUserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T19:09:00.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\User.cs",
+              "RelativeDocumentMoniker": "WebService\\Models\\User.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\User.cs",
+              "RelativeToolTip": "WebService\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-14T18:36:21.989Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "IProductService.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Interfaces\\IProductService.cs",
-              "RelativeDocumentMoniker": "WebService\\Interfaces\\IProductService.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Interfaces\\IProductService.cs",
-              "RelativeToolTip": "WebService\\Interfaces\\IProductService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAmAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Program.cs",
+              "RelativeDocumentMoniker": "WebService\\Program.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Program.cs",
+              "RelativeToolTip": "WebService\\Program.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABoAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T13:54:51.866Z",
+              "WhenOpened": "2024-09-14T14:18:06.661Z",
               "EditorCaption": ""
             }
           ]
