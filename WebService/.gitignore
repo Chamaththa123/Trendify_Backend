@@ -1,1 +1,110 @@
+# Visual Studio
 .vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build Results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+.laser
+.vscode/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/appsettings*.json
+
+# Backup & IDE generated files
+Backup*/
+_ReSharper*/
+*.ReSharper
+[Tt]humbs.db
+*.psess
+[Uu]pgradeLog.htm
+[Uu]pgradeLog.xml
+[Tt]est[Rr]esult*
+*.Publish.xml
+.vscode/
+*.publishsettings
+.idea/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# User-specific files
+*.rsuser
+*.rsuser.db
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.yarn/
+.pnp.*
+
+# Logs
+*.log
+*.tlg
+*.log
+
+# Database
+*.mdf
+*.ldf
+
+# Resharper files
+_ReSharper*/
+
+# Rider files
+.idea/
+
+# IIS
+.publishxml
+*.pubxml
+*.publishproj
+
+# Web auto-generated files
+publish/
+app.publish/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# NCrunch
+_NCrunch_*
+
+# ASP.NET specific items
+wwwroot/
+node_modules/
+
+# Ignore EF migrations (optional)
+Migrations/
+
+# DotNetLocal
+artifacts/
