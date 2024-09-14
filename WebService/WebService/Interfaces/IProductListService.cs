@@ -3,7 +3,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace WebService.Interfaces
 {
-    /// This interface provides methods for managing product list.
+    // This interface provides methods for managing product list.
 
     public interface IProductListService
     {
