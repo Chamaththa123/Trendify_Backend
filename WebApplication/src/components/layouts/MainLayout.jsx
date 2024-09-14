@@ -61,6 +61,10 @@ export const MainLayout = () => {
       mainPath = "Dashboard";
       subPaths = ["Back", "New Job"];
       break;
+      case "/products":
+        mainPath = "Products";
+        subPaths = ["Back", "Product", "Product Listing"];
+        break;
     default:
       break;
   }

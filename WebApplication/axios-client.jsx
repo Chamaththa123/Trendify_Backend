@@ -1,9 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const axiosClient = axios.create({
-  baseURL: `http://localhost:8000/api`,
-  // baseURL: `https://unidilbackend.optimizesolutions.lk/api`,
-  // baseURL: `https://unidilbackend.optimizesolutions.lk/api`,
+  baseURL: `https://localhost:44305/api/`,
 
   headers: {
     "Content-Type": "application/json",

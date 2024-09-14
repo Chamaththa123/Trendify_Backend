@@ -107,6 +107,7 @@ div.content {
   background-color: #F6FBFF;
   color: #64728C;
   padding: 7px 10px;
+  margin-right: 10px;
   border-radius: 15px;
   border: none;
 }
@@ -121,4 +122,12 @@ div.content {
 
 .rounded-card{
   border-radius: 10px;
+}
+
+.theme-text-color{
+  color: #64728C;
+}
+
+.theme-button-color{
+  color: #64728C;
 }
