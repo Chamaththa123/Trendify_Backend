@@ -30,9 +30,14 @@ namespace WebService.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string Email, string Password)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            var user = await _userService.AuthenticateUser(Email, Password);
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
+            {
+                return BadRequest("Email and password are required");
+            }
+
+            var user = await _userService.AuthenticateUser(loginRequest.Email, loginRequest.Password);
             if (user == null)
             {
                 return Unauthorized("Invalid email or password");
