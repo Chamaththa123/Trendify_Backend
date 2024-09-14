@@ -66,7 +66,7 @@ namespace WebService.Controllers
 
             await _productService.RemoveProduct(id);
 
-            return NoContent();
+            return Ok(new { Message = "Product deleted successfully" });
         }
 
         [HttpPatch("{id}/status")]

@@ -44,3 +44,15 @@ E:\My Project\EAD_Project\WebService\WebService\obj\Debug\net8.0\refint\WebServi
 E:\My Project\EAD_Project\WebService\WebService\obj\Debug\net8.0\WebService.pdb
 E:\My Project\EAD_Project\WebService\WebService\obj\Debug\net8.0\WebService.genruntimeconfig.cache
 E:\My Project\EAD_Project\WebService\WebService\obj\Debug\net8.0\ref\WebService.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\BCrypt.Net-Next.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+E:\My Project\EAD_Project\WebService\WebService\bin\Debug\net8.0\System.IO.BinaryExtensions.dll
