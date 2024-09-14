@@ -1,4 +1,6 @@
-﻿namespace WebService.Settings
+﻿//Create a settings class to store MongoDB connection information.
+
+namespace WebService.Settings
 {
     public class MongoDBSettings
     {
