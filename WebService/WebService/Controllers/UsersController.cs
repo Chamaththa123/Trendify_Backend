@@ -25,49 +25,121 @@ namespace WebService.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(User newUser)
         {
-            await _userService.RegisterUser(newUser);
-            return CreatedAtAction(nameof(Login), new { email = newUser.Email }, newUser);
+            try
+            {
+                // Validate empty or null fields
+                var emptyFields = new List<string>();
+
+                if (newUser == null)
+                {
+                    return BadRequest("User data is required.");
+                }
+
+                if (string.IsNullOrEmpty(newUser.Email))
+                {
+                    emptyFields.Add(nameof(newUser.Email));
+                }
+
+                if (string.IsNullOrEmpty(newUser.PasswordHash))
+                {
+                    emptyFields.Add(nameof(newUser.PasswordHash));
+                }
+
+                if (string.IsNullOrEmpty(newUser.First_Name))
+                {
+                    emptyFields.Add(nameof(newUser.First_Name));
+                }
+
+                if (string.IsNullOrEmpty(newUser.Last_Name))
+                {
+                    emptyFields.Add(nameof(newUser.Last_Name));
+                }
+
+                // If there are any empty fields, return them in the response
+                if (emptyFields.Any())
+                {
+                    return BadRequest(new { Message = "The following fields are required:", EmptyFields = emptyFields });
+                }
+
+                await _userService.RegisterUser(newUser);
+                return CreatedAtAction(nameof(Login), new { email = newUser.Email,message="User is registered Succuessfully !!" }, newUser);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred during registration", Details = ex.Message });
+            }
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
+            try
             {
-                return BadRequest("Email and password are required");
-            }
+                if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
+                {
+                    return BadRequest("Email and password are required");
+                }
 
-            var user = await _userService.AuthenticateUser(loginRequest.Email, loginRequest.Password);
-            if (user == null)
+                var user = await _userService.AuthenticateUser(loginRequest.Email, loginRequest.Password);
+                if (user == null)
+                {
+                    return Unauthorized("Invalid email or password");
+                }
+
+                var token = GenerateJwtToken(user);
+                return Ok(new { Token = token, Message = "user is logined successfully" });
+            }
+            catch (Exception ex)
             {
-                return Unauthorized("Invalid email or password");
-            }
+                return StatusCode(500, new { Message = "An error occurred during login", Details = ex.Message });
 
-            var token = GenerateJwtToken(user);
-            return Ok(new { Token = token });
+            }
+           
         }
 
         private string GenerateJwtToken(User user)
         {
-            var claims = new[]
+            try
             {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim(ClaimTypes.Role, user.Role) // Single role
-    };
+                // Add user details as claims
+                var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),  // Email as a subject
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),  // Unique Token ID
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.GivenName, user.First_Name),
+                    new Claim(ClaimTypes.Surname, user.Last_Name),
+                    new Claim(ClaimTypes.Role, user.Role),
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    // Custom claim types
+                    new Claim("NIC", user.NIC),
+                    new Claim("Address", user.Address),
+                    new Claim("IsActive", user.IsActive.ToString())
+        };
 
-            var token = new JwtSecurityToken(
-                issuer: "your_app",
-                audience: "your_app",
-                claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: creds);
+                // Create the key from the secret
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                // Generate the token
+                var token = new JwtSecurityToken(
+                    issuer: "your_app",
+                    audience: "your_app",
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddHours(1),  // Set token expiration time
+                    signingCredentials: creds);
+
+                // Return the generated token
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+                // Handle token generation errors
+                throw new InvalidOperationException("Failed to generate JWT token.", ex);
+            }
         }
+
 
     }
 }
