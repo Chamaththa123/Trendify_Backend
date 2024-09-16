@@ -46,8 +46,7 @@
               "RelativeToolTip": "WebService\\Controllers\\ProductsController.cs",
               "ViewState": "AQIAAEIAAAAAAAAAAAAAAEQAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T11:38:56.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-15T11:38:56.379Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "WebService\\Models\\Product.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T11:24:28.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-15T11:24:28.347Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "WebService\\Services\\UserService.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAAABYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T20:24:29.923Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-14T20:24:29.923Z"
             },
             {
               "$type": "Document",
@@ -83,7 +80,7 @@
               "RelativeDocumentMoniker": "WebService\\Controllers\\UsersController.cs",
               "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\UsersController.cs",
               "RelativeToolTip": "WebService\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAG4AAABFAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAG4AAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-14T19:19:00.599Z",
               "EditorCaption": ""
@@ -98,8 +95,7 @@
               "RelativeToolTip": "WebService\\Interfaces\\IUserService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T19:09:00.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-14T19:09:00.218Z"
             },
             {
               "$type": "Document",
@@ -111,8 +107,7 @@
               "RelativeToolTip": "WebService\\Models\\User.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAAwCYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T18:36:21.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-14T18:36:21.989Z"
             }
           ]
         }

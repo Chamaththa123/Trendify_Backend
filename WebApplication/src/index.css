@@ -131,3 +131,36 @@ div.content {
 .theme-button-color{
   color: #64728C;
 }
+
+/* External CSS for custom button styling */
+
+.modal-btn{
+  background-color: rgba(118, 158, 255, 0.3);
+  opacity:30;
+  border-radius: 20px;
+  padding: 8px 10px;
+  font-size: 14px; 
+  font-weight: 600; 
+  line-height: 22px; 
+  color: #10275E;
+  border: none;
+}
+
+.edit-btn{
+  border: none;
+  background-color: white;
+}
+
+.modal-label{
+  font-size: 14px;
+}
+
+.error-text{
+  font-size: 12px;
+  font-weight: 600;
+  color: #fb4b4b;
+}
+
+.form-btn-text{
+  font-size: 13px;
+}
