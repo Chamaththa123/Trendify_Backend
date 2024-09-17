@@ -128,6 +128,14 @@ div.content {
   color: #64728C;
 }
 
+.theme-bg-color{
+  background-color: #2a3577;
+}
+
+.sign-in-bg-color{
+  background-color: #f0f1fc;
+}
+
 .theme-button-color{
   color: #64728C;
 }
