@@ -128,6 +128,71 @@ div.content {
   color: #64728C;
 }
 
+.theme-bg-color{
+  background-color: #2a3577;
+}
+
+.sign-in-bg-color{
+  background-color: #f0f1fc;
+}
+
 .theme-button-color{
   color: #64728C;
+}
+
+/* External CSS for custom button styling */
+
+.modal-btn{
+  background-color: rgba(118, 158, 255, 0.3);
+  opacity:30;
+  border-radius: 20px;
+  padding: 8px 10px;
+  font-size: 14px; 
+  font-weight: 600; 
+  line-height: 22px; 
+  color: #10275E;
+  border: none;
+}
+
+.edit-btn{
+  border: none;
+  background-color: white;
+}
+
+.modal-label{
+  font-size: 14px;
+}
+
+.error-text{
+  font-size: 12px;
+  font-weight: 600;
+  color: #fb4b4b;
+}
+
+.form-btn-text{
+  font-size: 13px;
+}
+
+.status-inactive-btn{
+  background-color: #ff8b8b;
+  color: #e00000;
+  padding: 0px 5px 0px 5px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  width: 60px;
+  text-align: center;
+}
+
+.status-active-btn{
+  background-color: #9fff9b;
+  color: #076802;
+  padding: 0px 5px 0px 5px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  width: 60px;
+  text-align: center;
 }
