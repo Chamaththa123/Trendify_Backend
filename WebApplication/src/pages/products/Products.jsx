@@ -54,9 +54,9 @@ export const Products = () => {
       name: "Status",
       selector: (row) =>
         row.isActive === false ? (
-          <p>Inactive</p>
+          <div className="status-inactive-btn">Inactive</div>
         ) : row.isActive === true ? (
-          <p>Active</p>
+          <div className="status-active-btn">Active</div>
         ) : null,
       wrap: false,
       minWidth: "200px",

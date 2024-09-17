@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import axiosClient from "../../../axios-client";
 import { tableHeaderStyles } from "../../utils/dataArrays";
-import { EditNewIcon } from "../../utils/icons";
+import { ChangeIcon, EditNewIcon } from "../../utils/icons";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export const ProductListing = ({ id, title }) => {
@@ -12,7 +12,7 @@ export const ProductListing = ({ id, title }) => {
   const [errors, setErrors] = useState({});
 
   const [editProductList, setEditProductList] = useState({
-    id: 0,
+    id: "0",
     Name: "",
     Description: "",
   });
@@ -26,12 +26,11 @@ export const ProductListing = ({ id, title }) => {
 
   const resetEditForm = () => {
     setEditProductList({
-      id: 0,
+      id: "0",
       Name: "",
       Description: "",
     });
     setAddProductList({
-      id: 0,
       Name: "",
       Description: "",
     });
@@ -90,7 +89,7 @@ export const ProductListing = ({ id, title }) => {
 
   const handleCancelEditProductList = () => {
     setEditProductList({
-      id: 0,
+      id: "0",
       Name: "",
       Description: "",
     });
@@ -136,6 +135,29 @@ export const ProductListing = ({ id, title }) => {
       });
   };
 
+
+  const handleStatusChange = (productList) => {
+    axiosClient
+      .patch(`ProductLists/${productList.id}/state`)
+      .then((response) => {
+        handleLoading();
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: `Product status updated Successfully !!`,
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating product status:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong while updating the product status.",
+        });
+      });
+  };
+
+  
   const TABLE_PRODUCT_LIST = [
     {
       name: "Name",
@@ -151,19 +173,36 @@ export const ProductListing = ({ id, title }) => {
       name: "Description",
       selector: (row) => row.description,
       wrap: false,
-      maxWidth: "auto",
       cellStyle: {
         whiteSpace: "normal",
         wordBreak: "break-word",
       },
     },
     {
+      name: "Status",
+      selector: (row) =>
+        row.isActive === false ? (
+          <div className="status-inactive-btn">Inactive</div>
+        ) : row.isActive === true ? (
+          <div className="status-active-btn">Active</div>
+        ) : null,
+      wrap: false,
+      minWidth: "200px",
+    },
+    {
       name: "Action",
       cell: (row) => (
+        <div>
         <button className="edit-btn" onClick={() => handleEditProductList(row)}>
           <EditNewIcon />
         </button>
+        <button className="edit-btn" onClick={() => handleStatusChange(row)}>
+          <ChangeIcon />
+        </button>
+        </div>
+        
       ),
+      minWidth: "50px",
     },
   ];
 
@@ -194,7 +233,7 @@ export const ProductListing = ({ id, title }) => {
               <div className="col-12 col-md-6">
                 <div class="form-group">
                   <div className="modal-label">Name</div>
-                  {editProductList.id !== 0 ? (
+                  {editProductList.id !== "0" ? (
                     <input
                       name="Name"
                       type="text"
@@ -229,7 +268,7 @@ export const ProductListing = ({ id, title }) => {
               <div className="col-12 col-md-6">
                 <div class="form-group">
                   <div className="modal-label">Description</div>
-                  {editProductList.id !== 0 ? (
+                  {editProductList.id !== "0" ? (
                     <input
                       name="Description"
                       type="text"
@@ -264,7 +303,7 @@ export const ProductListing = ({ id, title }) => {
             </div>
 
             <div className="mt-4">
-              {editProductList.id !== 0 ? (
+              {editProductList.id !== "0" ? (
                 <div className="d-flex justify-content-end">
                   <button
                     onClick={() => handleCancelEditProductList()}
@@ -286,7 +325,7 @@ export const ProductListing = ({ id, title }) => {
                     onClick={() => handleSave()}
                     className="btn btn-primary form-btn-text"
                   >
-                    Add Zone
+                    Add List
                   </button>
                 </div>
               )}

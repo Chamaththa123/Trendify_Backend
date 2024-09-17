@@ -164,3 +164,27 @@ div.content {
 .form-btn-text{
   font-size: 13px;
 }
+
+.status-inactive-btn{
+  background-color: #ff8b8b;
+  color: #e00000;
+  padding: 0px 5px 0px 5px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  width: 60px;
+  text-align: center;
+}
+
+.status-active-btn{
+  background-color: #9fff9b;
+  color: #076802;
+  padding: 0px 5px 0px 5px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  width: 60px;
+  text-align: center;
+}
