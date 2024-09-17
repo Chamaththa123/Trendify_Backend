@@ -4,7 +4,7 @@ namespace WebService.Interfaces
 {
     public interface IUserService
     {
-        Task RegisterUser(User newUser);
+        Task<User> RegisterUser(User user);
         Task<User?> GetUserByEmail(string email);
         Task<User?> AuthenticateUser(string email, string password);
     }

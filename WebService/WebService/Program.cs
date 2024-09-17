@@ -25,6 +25,8 @@ builder.Services.AddSingleton<IMongoClient, MongoClient>(sp =>
 builder.Services.AddSingleton<IProductListService, ProductListService>();
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddScoped<IVendorService, VendorService>();
+
 
 builder.Services.AddControllers();
 

@@ -19,11 +19,12 @@ namespace WebService.Services
             _userCollection = mongoDatabase.GetCollection<User>(CollectionName);
         }
 
-        public async Task RegisterUser(User newUser)
+
+        public async Task<User> RegisterUser(User newUser)
         {
-            // Hash the password before storing it
             newUser.PasswordHash = HashPassword(newUser.PasswordHash);
             await _userCollection.InsertOneAsync(newUser);
+            return newUser;
         }
 
         public async Task<User?> GetUserByEmail(string email)
