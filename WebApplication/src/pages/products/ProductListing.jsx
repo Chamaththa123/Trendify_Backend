@@ -135,7 +135,6 @@ export const ProductListing = ({ id, title }) => {
       });
   };
 
-
   const handleStatusChange = (productList) => {
     axiosClient
       .patch(`ProductLists/${productList.id}/state`)
@@ -157,7 +156,25 @@ export const ProductListing = ({ id, title }) => {
       });
   };
 
-  
+  useEffect(() => {
+    // Destroy any previous tooltips to avoid duplication or issues
+    const existingTooltips = document.querySelectorAll(".tooltip");
+    existingTooltips.forEach((tooltip) => tooltip.remove());
+
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    return () => {
+      // Clean up on unmount or when content changes
+      tooltipList.forEach((tooltip) => tooltip.dispose());
+    };
+  }, [productList, productListTableLoading]);
+
   const TABLE_PRODUCT_LIST = [
     {
       name: "Name",
@@ -193,14 +210,25 @@ export const ProductListing = ({ id, title }) => {
       name: "Action",
       cell: (row) => (
         <div>
-        <button className="edit-btn" onClick={() => handleEditProductList(row)}>
-          <EditNewIcon />
-        </button>
-        <button className="edit-btn" onClick={() => handleStatusChange(row)}>
-          <ChangeIcon />
-        </button>
+          <button
+            className="edit-btn me-4"
+            onClick={() => handleEditProductList(row)}
+            title="Edit Product"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+          >
+            <EditNewIcon />
+          </button>
+          <button
+            className="edit-btn"
+            onClick={() => handleStatusChange(row)}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Change Status"
+          >
+            <ChangeIcon />
+          </button>
         </div>
-        
       ),
       minWidth: "50px",
     },

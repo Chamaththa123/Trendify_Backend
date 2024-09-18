@@ -21,11 +21,23 @@ export const newNavigationItems = [
   },
 ];
 
+export const adminSidebarItems = [
+  { title: "Dashboard", link: "/", icon: DashboardIcon },
+  { title: "Products", link: "/products", icon: EstateIcon },
+  { title: "Suppliers", link: "/suppliers", icon: SupplierIcon },
+  // Add more admin-specific items here
+];
+
+export const userSidebarItems = [
+  { title: "Dashboard", link: "/", icon: DashboardIcon },
+  { title: "Products", link: "/products", icon: EstateIcon },
+  // User-specific items (fewer than admin)
+];
+
 export const subPathLinks = {
   "New Estate": "/estate/add",
   "New Supplier": "/supplier/add",
 };
-
 
 export const tableHeaderStyles = {
   headCells: {

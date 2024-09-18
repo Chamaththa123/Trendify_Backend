@@ -36,19 +36,20 @@ export const Products = () => {
       name: "Product List",
       selector: (row) => row.productListName,
       wrap: false,
-      minWidth: "200px",
+      minWidth: "auto",
     },
     {
       name: "Price (Rs)",
       selector: (row) => row.price,
       wrap: false,
-      minWidth: "200px",
+      minWidth: "auto",
+      left:true
     },
     {
       name: "Stock",
       selector: (row) => row.stock,
       wrap: false,
-      minWidth: "200px",
+      minWidth: "auto",
     },
     {
       name: "Status",

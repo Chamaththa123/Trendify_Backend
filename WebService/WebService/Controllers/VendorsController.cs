@@ -44,7 +44,9 @@ namespace WebService.Controllers
                 //Console.WriteLine($"Created User ID: {createdUser.Id}");
                 // Set the UserId in the Vendor model
                  vendor.UserId = createdUser.Id;
-                // Console.WriteLine(vendor.UserId);
+                 Console.WriteLine(vendor.UserId);
+
+                System.Diagnostics.Debug.WriteLine("Debugging value: " + vendor.UserId);
 
                 // Register the vendor with the updated UserId
                 await _vendorService.RegisterVendor(vendor);

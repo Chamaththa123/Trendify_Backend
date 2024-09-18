@@ -12,8 +12,10 @@ export const MainLayout = () => {
   const dropdownRef = useRef(null);
   const sideBardownRef = useRef(null);
   const sideBarButtondownRef = useRef(null);
-  const { token, setUser, setToken } = useStateContext();
+  const { token, setUser, setToken,user } = useStateContext();
 
+  console.log('user',user);
+  console.log('token',token);
   const handleLogout = () => {
     setUser(null);
     setToken(null);
@@ -88,7 +90,11 @@ export const MainLayout = () => {
         className={`main-content transition-all duration-300 flex-grow-1`}
       >
         <div className="header">
-          <div className="main-path">{mainPath}</div>
+        <div className="d-flex justify-content-between">
+  <div className="main-path">{mainPath}</div>
+  <div className="my-4 me-3">{user.username}</div>
+</div>
+
           {/* <div className="d-flex align-items-center">
               <div className="position-relative" ref={dropdownRef}>
                 <div

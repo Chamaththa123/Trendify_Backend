@@ -87,7 +87,21 @@ namespace WebService.Controllers
                 }
 
                 var token = GenerateJwtToken(user);
-                return Ok(new { Token = token, Message = "user is logined successfully" });
+
+                var UserDetails = new
+                {
+                    user.Id,
+                    user.Username,
+                    user.First_Name,
+                    user.Last_Name,
+                    user.Email,
+                    user.NIC,
+                    user.Address,
+                    user.Role,
+                    user.IsActive
+                };
+
+                return Ok(new { Token = token,user= UserDetails, Message = "user is logined successfully" });
             }
             catch (Exception ex)
             {
