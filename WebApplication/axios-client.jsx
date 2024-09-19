@@ -35,9 +35,9 @@ axiosClient.interceptors.response.use(
         let baseURL = window.location.origin;
         let fullPath = window.location.href;
         let pathAfterBaseURL = fullPath.substring(baseURL.length);
-        // if (pathAfterBaseURL !== "/login") {
-        //   window.location.href = "/login";
-        // }
+        if (pathAfterBaseURL !== "/login") {
+          window.location.href = "/login";
+        }
       }
     } catch (error) {
       console.error(error);

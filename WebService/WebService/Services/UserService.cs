@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Data;
 using WebService.Interfaces;
 using WebService.Models;
 using WebService.Settings;
@@ -19,11 +20,12 @@ namespace WebService.Services
             _userCollection = mongoDatabase.GetCollection<User>(CollectionName);
         }
 
-        public async Task RegisterUser(User newUser)
+
+        public async Task<User> RegisterUser(User newUser)
         {
-            // Hash the password before storing it
             newUser.PasswordHash = HashPassword(newUser.PasswordHash);
             await _userCollection.InsertOneAsync(newUser);
+            return newUser;
         }
 
         public async Task<User?> GetUserByEmail(string email)
@@ -57,6 +59,30 @@ namespace WebService.Services
             // Verify the hashed password
             var hashedPassword = HashPassword(password);
             return hashedPassword == storedHash;
+        }
+
+        //get all users
+        public async Task<List<User>> GetAllUsers(string role)
+        {
+            return await _userCollection.Find(x => x.Role == role).ToListAsync();
+        }
+
+        //get specific product list
+        public async Task<User?> GetUserById(string id)
+        {
+            return await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        //change user status
+        public async Task ChangeUserStatus(string id)
+        {
+            var user = await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                user.IsActive = !user.IsActive;
+                await _userCollection.ReplaceOneAsync(x => x.Id == id, user);
+            }
         }
     }
 }

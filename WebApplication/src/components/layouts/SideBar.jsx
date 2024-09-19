@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { newNavigationItems } from "../../utils/dataArrays";
+import { adminSidebarItems, userSidebarItems } from "../../utils/dataArrays";
 import { useStateContext } from "../../contexts/NavigationContext";
 import logo from "../../assets/images/Logo.png";
 
@@ -12,7 +12,8 @@ export const SideBar = ({
   showSalesman,
 }) => {
   const location = useLocation(); // Get current location
-
+  const { token, setUser, setToken, user } = useStateContext();
+  const sidebarItems = user.role === "admin" ? adminSidebarItems : userSidebarItems;
   return (
     <div>
       <div className="sidebar">
@@ -20,7 +21,7 @@ export const SideBar = ({
           <img src={logo} alt="Logo" />
         </div>
 
-        {newNavigationItems.slice(0, 8).map((item, itemIndex) => {
+        {sidebarItems.slice(0, 8).map((item, itemIndex) => {
           const isActive = location.pathname === item.link;
           const NavIcon = item.icon;
           return (

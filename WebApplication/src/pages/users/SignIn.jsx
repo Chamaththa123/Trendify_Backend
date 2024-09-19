@@ -44,7 +44,7 @@ const SignIn = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       axiosClient
-        .post("/auth/login-user", loginData)
+        .post("Users/login", loginData)
         .then(({ data }) => {
           setUser(data.user);
           setToken(data.token);

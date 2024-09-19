@@ -6,6 +6,7 @@ using System.Text;
 using WebService.Interfaces;
 using WebService.Models;
 using System;
+using WebService.Services;
 
 
 namespace WebService.Controllers
@@ -86,8 +87,27 @@ namespace WebService.Controllers
                     return Unauthorized("Invalid email or password");
                 }
 
+                if (!user.IsActive)
+                {
+                    return Unauthorized("Your account is deactivated. Please contact support.");
+                }
+
                 var token = GenerateJwtToken(user);
-                return Ok(new { Token = token, Message = "user is logined successfully" });
+
+                var UserDetails = new
+                {
+                    user.Id,
+                    user.Username,
+                    user.First_Name,
+                    user.Last_Name,
+                    user.Email,
+                    user.NIC,
+                    user.Address,
+                    user.Role,
+                    user.IsActive
+                };
+
+                return Ok(new { Token = token,user= UserDetails, Message = "user is logined successfully" });
             }
             catch (Exception ex)
             {
@@ -140,6 +160,39 @@ namespace WebService.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<List<User>> GetAllUsers(string role)
+        {
+            try
+            {
+                var users = await _userService.GetAllUsers(role);
 
+                return users;
+            } catch (Exception ex)
+            {
+                throw new InvalidOperationException("Fail to get all users", ex);
+            }
+        }
+
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> ChangeState(string id)
+        {
+            try
+            {
+                var user = await _userService.GetUserById(id);
+
+                if (user is null)
+                {
+                    return NotFound();
+                }
+
+                await _userService.ChangeUserStatus(id);
+
+                return NoContent();
+            }
+            catch (Exception ex) {
+                return StatusCode(500, new { Message = "An error occurred during changing user status", Details = ex.Message });
+            }
+        }
     }
 }
