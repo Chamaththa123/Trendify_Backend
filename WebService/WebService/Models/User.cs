@@ -33,6 +33,8 @@ namespace WebService.Models
 
         public string Role { get; set; } = string.Empty;
 
+        public double AverageRating { get; set; } = 0;
+
         public bool IsActive { get; set; } = true;
     }
 }

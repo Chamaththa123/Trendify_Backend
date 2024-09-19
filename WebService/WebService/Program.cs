@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using System.Text;
 using WebService.Interfaces;
+using WebService.Models;
 using WebService.Services;
 using WebService.Settings;
 
@@ -19,13 +20,36 @@ builder.Services.AddSingleton<IMongoClient, MongoClient>(sp =>
     return new MongoClient(settings.ConnectionString);
 });
 
+// Register MongoDB collections
+builder.Services.AddSingleton(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    var database = client.GetDatabase(sp.GetRequiredService<IOptions<MongoDBSettings>>().Value.DatabaseName);
+    return database.GetCollection<User>("user");
+});
+
+builder.Services.AddSingleton(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    var database = client.GetDatabase(sp.GetRequiredService<IOptions<MongoDBSettings>>().Value.DatabaseName);
+    return database.GetCollection<Ranking>("ranking");
+});
+
+// Add Comment collection to DI
+builder.Services.AddSingleton(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    var database = client.GetDatabase(sp.GetRequiredService<IOptions<MongoDBSettings>>().Value.DatabaseName);
+    return database.GetCollection<Comment>("comment");
+});
+
 
 // Add services to the container.
 
 builder.Services.AddSingleton<IProductListService, ProductListService>();
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IUserService, UserService>();
-builder.Services.AddScoped<IVendorService, VendorService>();
+builder.Services.AddSingleton<IRankingComment, RankingCommentService>();
 
 
 builder.Services.AddControllers();
