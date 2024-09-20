@@ -4,9 +4,12 @@ import axiosClient from "../../../axios-client";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import { tableHeaderStyles, customSelectStyles } from "../../utils/dataArrays";
-import { ProductCategory } from "../../utils/icons";
+import { AddUser, ProductCategory } from "../../utils/icons";
 import { ChangeIcon, EditNewIcon } from "../../utils/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Rating from "react-rating";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import AddUsers from "./AddUsers";
 
 export const Vendors = () => {
   const [vendors, setVendors] = useState([]);
@@ -33,24 +36,25 @@ export const Vendors = () => {
   // Effect to filter vendors
   useEffect(() => {
     const filtered = vendors.filter((vendor) => {
-        const matchesName = nameFilter
+      const matchesName = nameFilter
         ? `${vendor.first_Name} ${vendor.last_Name}`
             .toLowerCase()
             .includes(nameFilter.toLowerCase())
         : true;
-
-      const matchesStatus =
-        statusFilter && statusFilter.value !== ""
-          ? vendor.isActive === statusFilter
-          : true;
-          return matchesName && matchesStatus;
+  
+      const matchesStatus = statusFilter && statusFilter.value !== ""
+        ? vendor.isActive === statusFilter.value
+        : true;
+  
+      return matchesName && matchesStatus;
     });
-
+  
     setFilteredVendors(filtered);
-  }, [statusFilter, vendors,nameFilter]);
+  }, [statusFilter, vendors, nameFilter]);
+  
 
-  const handleStatusFilterChange = (event) => {
-    setStatusFilter(event.value);
+  const handleStatusFilterChange = (selectedOption) => {
+    setStatusFilter(selectedOption);
   };
 
   // Added handler for name filter
@@ -141,11 +145,19 @@ export const Vendors = () => {
       },
     },
     {
-      name: "Avg Rating",
-      selector: (row) => row.averageRating,
-      wrap: false,
-      minWidth: "auto",
-    },
+        name: "Avg Rating",
+        selector: (row) => (
+          <Rating
+            readonly
+            initialRating={row.averageRating} // use the rating value from your data
+            emptySymbol={<FaRegStar color="#ffd700" style={{ fontSize: "15px" }}/>}
+            fullSymbol={<FaStar color="#ffd700" style={{ fontSize: "15px" }}/>}
+            fractions={2} // Enables half-star ratings
+          />
+        ),
+        wrap: false,
+        minWidth: "150px",
+      },
     {
       name: "Status",
       selector: (row) =>
@@ -244,20 +256,8 @@ export const Vendors = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModalCenter"
               >
-                <ProductCategory />
-                &nbsp; Product Listing
-              </button>
-            </div>
-
-            <div>
-              <button
-                className="modal-btn"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModalCenter"
-              >
-                <ProductCategory />
-                &nbsp;Add Product
+                <AddUser />
+                &nbsp;Add New Vendor
               </button>
             </div>
           </div>
@@ -281,7 +281,7 @@ export const Vendors = () => {
         />
       </div>
 
-      {/* <ProductListing id="exampleModalCenter" title="Product Listing" /> */}
+      <AddUsers id="exampleModalCenter" userType='vendor' handleLoading={handleLoading} />
     </section>
   );
 };
