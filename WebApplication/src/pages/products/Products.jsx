@@ -1,4 +1,3 @@
-// src/components/Products.js
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import axiosClient from "../../../axios-client";
@@ -43,7 +42,7 @@ export const Products = () => {
       selector: (row) => row.price,
       wrap: false,
       minWidth: "auto",
-      left:true
+      left: true,
     },
     {
       name: "Stock",
@@ -73,17 +72,36 @@ export const Products = () => {
       <div className="container bg-white rounded-card p-4 theme-text-color">
         <div className="row">
           <div className="col-6">
-            <span style={{ fontSize: "15px", fontWeight: "600" }}>
-              Search Product
-            </span>
-            <Select
-              classNamePrefix="select"
-              isSearchable={true}
-              name="color"
-              styles={customSelectStyles}
-            />
+            <div className="d-flex align-items-center">
+              <div className="col-6">
+                <span style={{ fontSize: "15px", fontWeight: "600" }}>
+                  Search Product
+                </span>
+                <Select
+                  classNamePrefix="select"
+                  isSearchable={true}
+                  name="color"
+                  styles={customSelectStyles}
+                  className="col-9"
+                />
+              </div>
+
+              <div className="col-6">
+                <span style={{ fontSize: "15px", fontWeight: "600" }}>
+                  Search Product
+                </span>
+                <Select
+                  classNamePrefix="select"
+                  isSearchable={true}
+                  name="color"
+                  styles={customSelectStyles}
+                  className="col-9"
+                />
+              </div>
+            </div>
           </div>
-          <div className="col-6 d-flex justify-content-end">
+
+          <div className="col-6 d-flex justify-content-end gap-3">
             <div>
               <button
                 className="modal-btn"
@@ -93,6 +111,18 @@ export const Products = () => {
               >
                 <ProductCategory />
                 &nbsp; Product Listing
+              </button>
+            </div>
+
+            <div>
+              <button
+                className="modal-btn"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter"
+              >
+                <ProductCategory />
+                &nbsp;Add Product
               </button>
             </div>
           </div>

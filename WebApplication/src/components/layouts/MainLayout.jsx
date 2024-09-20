@@ -67,6 +67,14 @@ export const MainLayout = () => {
         mainPath = "Products";
         subPaths = ["Back", "Product", "Product Listing"];
         break;
+        case "/users/vendors":
+          mainPath = "Users";
+          subPaths = ["Back", "Vendor", "CSR"];
+          break;
+          case "/users/csr":
+            mainPath = "Users";
+            subPaths = ["Back", "Vendor", "CSR"];
+            break;
     default:
       break;
   }
@@ -92,7 +100,7 @@ export const MainLayout = () => {
         <div className="header">
         <div className="d-flex justify-content-between">
   <div className="main-path">{mainPath}</div>
-  <div className="my-4 me-3">{user.username}</div>
+  <div className="my-4 me-3">{user?.username}</div>
 </div>
 
           {/* <div className="d-flex align-items-center">
