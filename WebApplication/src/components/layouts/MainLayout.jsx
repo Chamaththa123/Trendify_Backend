@@ -92,7 +92,7 @@ export const MainLayout = () => {
         <div className="header">
         <div className="d-flex justify-content-between">
   <div className="main-path">{mainPath}</div>
-  <div className="my-4 me-3">{user.username}</div>
+  <div className="my-4 me-3">{user?.username}</div>
 </div>
 
           {/* <div className="d-flex align-items-center">

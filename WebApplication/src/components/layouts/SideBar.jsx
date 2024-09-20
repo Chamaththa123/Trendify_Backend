@@ -13,7 +13,7 @@ export const SideBar = ({
 }) => {
   const location = useLocation(); // Get current location
   const { token, setUser, setToken, user } = useStateContext();
-  const sidebarItems = user.role === "admin" ? adminSidebarItems : userSidebarItems;
+  const sidebarItems = user?.role === "1" ? adminSidebarItems : userSidebarItems;
   return (
     <div>
       <div className="sidebar">

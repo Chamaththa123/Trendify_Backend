@@ -83,5 +83,33 @@ namespace WebService.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("stocks/update/{id}")]
+        public async Task<IActionResult> UpdateStock(string id, [FromBody] int additionalStock)
+        {
+            var product = await _productService.GetProductById(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            await _productService.UpdateStock(id, additionalStock);
+            return NoContent();
+        }
+
+        [HttpPut("stocks/reset{id}")]
+        public async Task<IActionResult> ResetStock(string id)
+        {
+            var product = await _productService.GetProductById(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            await _productService.ResetStock(id);
+            return NoContent();
+        }
     }
 }

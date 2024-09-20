@@ -30,7 +30,7 @@ export const adminSidebarItems = [
 
 export const userSidebarItems = [
   { title: "Dashboard", link: "/", icon: DashboardIcon },
-  { title: "Products", link: "/products", icon: EstateIcon },
+  { title: "Products", link: "/products", icon: EstateIcon }, 
   // User-specific items (fewer than admin)
 ];
 

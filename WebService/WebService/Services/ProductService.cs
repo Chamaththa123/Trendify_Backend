@@ -102,5 +102,31 @@ namespace WebService.Services
                 await _productCollection.ReplaceOneAsync(x => x.Id == id, product);
             }
         }
+
+        // Update stock by adding new values
+        public async Task UpdateStock(string id, int additionalStock)
+        {
+            var product = await _productCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            if (product == null)
+            {
+                throw new Exception("Product not found");
+            }
+
+            product.Stock += additionalStock;
+            await _productCollection.ReplaceOneAsync(x => x.Id == id, product);
+        }
+
+        // Reset stock to zero
+        public async Task ResetStock(string id)
+        {
+            var product = await _productCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            if (product == null)
+            {
+                throw new Exception("Product not found");
+            }
+
+            product.Stock = 0;
+            await _productCollection.ReplaceOneAsync(x => x.Id == id, product);
+        }
     }
 }

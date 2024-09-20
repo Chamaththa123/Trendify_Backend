@@ -83,7 +83,7 @@ export const Products = () => {
               styles={customSelectStyles}
             />
           </div>
-          <div className="col-6 d-flex justify-content-end">
+          <div className="col-6 d-flex justify-content-end gap-3">
             <div>
               <button
                 className="modal-btn"
@@ -93,6 +93,18 @@ export const Products = () => {
               >
                 <ProductCategory />
                 &nbsp; Product Listing
+              </button>
+            </div>
+
+            <div>
+              <button
+                className="modal-btn"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter"
+              >
+                <ProductCategory />
+                &nbsp;Add Product
               </button>
             </div>
           </div>

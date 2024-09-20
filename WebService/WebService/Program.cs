@@ -50,6 +50,7 @@ builder.Services.AddSingleton<IProductListService, ProductListService>();
 builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IRankingComment, RankingCommentService>();
+builder.Services.AddSingleton<IOrderService, OrderService>();
 
 
 builder.Services.AddControllers();

@@ -13,12 +13,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <ProtectedRoute element={<Dashboard />} allowedRoles={["0", "1"]} />,
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/products",
-        element: <ProtectedRoute element={<Products />} allowedRoles={["0","1"]} />,
-      }, 
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <Products />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
