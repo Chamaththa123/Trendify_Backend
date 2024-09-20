@@ -4,11 +4,10 @@ import axiosClient from "../../../axios-client";
 import Select from "react-select";
 import { tableHeaderStyles, customSelectStyles } from "../../utils/dataArrays";
 import { ProductCategory } from "../../utils/icons";
-import { ProductListing } from "./ProductListing";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export const Products = () => {
-  const [products, setProducts] = useState([]);
+export const Csr = () => {
+    const [products, setProducts] = useState([]);
 
   // Fetching products from the backend
   useEffect(() => {
@@ -42,7 +41,7 @@ export const Products = () => {
       selector: (row) => row.price,
       wrap: false,
       minWidth: "auto",
-      left: true,
+      left:true
     },
     {
       name: "Stock",
@@ -66,7 +65,6 @@ export const Products = () => {
       cell: (row) => <>{/* Add actions here if needed */}</>,
     },
   ];
-
   return (
     <section>
       <div className="container bg-white rounded-card p-4 theme-text-color">
@@ -146,7 +144,7 @@ export const Products = () => {
         />
       </div>
 
-      <ProductListing id="exampleModalCenter" title="Product Listing" />
+      {/* <ProductListing id="exampleModalCenter" title="Product Listing" /> */}
     </section>
-  );
-};
+  )
+}

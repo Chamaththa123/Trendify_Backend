@@ -14,6 +14,9 @@ export const SideBar = ({
   const location = useLocation(); // Get current location
   const { token, setUser, setToken, user } = useStateContext();
   const sidebarItems = user?.role === "1" ? adminSidebarItems : userSidebarItems;
+  
+  const isUsersSectionActive = location.pathname.startsWith('/users');
+
   return (
     <div>
       <div className="sidebar">
@@ -22,7 +25,7 @@ export const SideBar = ({
         </div>
 
         {sidebarItems.slice(0, 8).map((item, itemIndex) => {
-          const isActive = location.pathname === item.link;
+               const isActive = location.pathname === item.link || (item.link === "/users/vendors" && isUsersSectionActive);
           const NavIcon = item.icon;
           return (
             <a

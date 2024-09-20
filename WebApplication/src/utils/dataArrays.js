@@ -25,18 +25,17 @@ export const adminSidebarItems = [
   { title: "Dashboard", link: "/", icon: DashboardIcon },
   { title: "Products", link: "/products", icon: EstateIcon },
   { title: "Suppliers", link: "/suppliers", icon: SupplierIcon },
-  // Add more admin-specific items here
 ];
 
 export const userSidebarItems = [
   { title: "Dashboard", link: "/", icon: DashboardIcon },
   { title: "Products", link: "/products", icon: EstateIcon }, 
-  // User-specific items (fewer than admin)
+  { title: "Users", link: "/users/vendors", icon: EstateIcon }, 
 ];
 
 export const subPathLinks = {
-  "New Estate": "/estate/add",
-  "New Supplier": "/supplier/add",
+  "Vendor": "/users/vendors",
+  "CSR": "/users/csr",
 };
 
 export const tableHeaderStyles = {
@@ -63,9 +62,9 @@ export const customSelectStyles = {
     ...provided,
     fontSize: "14px",
     fontWeight: "600",
-    color: state.isFocused ? "#64728C" : "#64728C82",
-    borderColor: state.isFocused ? "#64728C" : provided.borderColor,
-    boxShadow: state.isFocused ? "0 0 0 1px #64728C" : provided.boxShadow,
+    color: state.isFocused ? "#80b1ff" : "#9ac1ff",
+    borderColor: state.isFocused ? "#9ac1ff" : provided.borderColor,
+    boxShadow: state.isFocused ? "0 0 0 3px #9ac1ff" : provided.boxShadow,
     "&:hover": {
       borderColor: state.isFocused ? "#64728C" : provided.borderColor,
     },

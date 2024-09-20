@@ -16,5 +16,8 @@ namespace WebService.Interfaces
 
         //activate or deactivate user
         Task ChangeUserStatus(string id);
+
+        Task<List<User>> GetVendors();
+        Task<List<User>> GetCSRs();
     }
 }

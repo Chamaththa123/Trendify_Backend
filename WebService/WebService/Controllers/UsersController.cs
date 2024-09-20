@@ -194,5 +194,35 @@ namespace WebService.Controllers
                 return StatusCode(500, new { Message = "An error occurred during changing user status", Details = ex.Message });
             }
         }
+
+        // Get all vendors (role = 3)
+        [HttpGet("vendors")]
+        public async Task<IActionResult> GetVendors()
+        {
+            try
+            {
+                var vendors = await _userService.GetVendors();
+                return Ok(vendors);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching vendors", Details = ex.Message });
+            }
+        }
+
+        // Get all CSRs (role = 2)
+        [HttpGet("csrs")]
+        public async Task<IActionResult> GetCSRs()
+        {
+            try
+            {
+                var csrs = await _userService.GetCSRs();
+                return Ok(csrs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching CSRs", Details = ex.Message });
+            }
+        }
     }
 }

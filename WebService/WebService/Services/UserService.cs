@@ -84,5 +84,17 @@ namespace WebService.Services
                 await _userCollection.ReplaceOneAsync(x => x.Id == id, user);
             }
         }
+
+        // Get vendors (role = 3)
+        public async Task<List<User>> GetVendors()
+        {
+            return await _userCollection.Find(x => x.Role == "3").ToListAsync();
+        }
+
+        // Get CSRs (role = 2)
+        public async Task<List<User>> GetCSRs()
+        {
+            return await _userCollection.Find(x => x.Role == "2").ToListAsync();
+        }
     }
 }

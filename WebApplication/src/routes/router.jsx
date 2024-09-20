@@ -5,6 +5,8 @@ import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { Products } from "../pages/products/Products";
 import SignIn from "../pages/users/SignIn";
 import ProtectedRoute from "./ProtectedRoute";
+import { Vendors } from "../pages/users/Vendors";
+import { Csr } from "../pages/users/Csr";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute roles={['1', '3']}>
             <Products />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/users/vendors",
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <Vendors />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/users/csr",
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <Csr />
           </ProtectedRoute>
         ),
       },
