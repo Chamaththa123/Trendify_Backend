@@ -26,6 +26,12 @@ namespace WebService.Models
         [Required(ErrorMessage = "Quantity is required.")]
         public int Stock { get; set; }
 
+        [Required(ErrorMessage = "Low stock level is required.")]
+        public int LowStockLvl { get; set; }
+
+        [Required(ErrorMessage = "Image is required.")]
+        public string Image { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         // Timestamp for when the product was created
@@ -39,5 +45,12 @@ namespace WebService.Models
         // Property to hold the Product List Name
         [BsonIgnore]
         public string? ProductListName { get; set; }
+
+        [BsonIgnore]
+        public string StockStatus => Stock == 0
+           ? "Out of Stock"
+           : Stock <= LowStockLvl
+               ? "Low Stock"
+               : "In Stock";
     }
 }
