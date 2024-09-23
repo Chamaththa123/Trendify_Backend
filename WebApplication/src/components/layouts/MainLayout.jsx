@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { SideBar } from "./SideBar";
 import { useStateContext } from "../../contexts/NavigationContext";
 import { subPathLinks } from "../../utils/dataArrays";
 import { ArrowBack } from "../../utils/icons";
+import userIcon from "../../assets/images/user.png";
 
 export const MainLayout = () => {
   const [signOutVisible, setSignOutVisible] = useState(false);
-  const [sidebar, setSidebar] = useState(true); // Sidebar initially expanded
+  const [sidebar, setSidebar] = useState(true);
   const dropdownRef = useRef(null);
   const sideBardownRef = useRef(null);
   const sideBarButtondownRef = useRef(null);
   const { token, setUser, setToken, user } = useStateContext();
 
-  console.log("user", user);
-  console.log("token", token);
   const handleLogout = () => {
     setUser(null);
     setToken(null);
@@ -79,6 +78,10 @@ export const MainLayout = () => {
       mainPath = "Users";
       subPaths = ["Back", "Vendor", "CSR"];
       break;
+      case "/profile":
+        mainPath = "Account";
+        subPaths = ["Back"];
+        break;
     default:
       break;
   }
@@ -104,7 +107,19 @@ export const MainLayout = () => {
         <div className="header">
           <div className="d-flex justify-content-between">
             <div className="main-path">{mainPath}</div>
-            <div className="my-4 me-3">{user?.username}</div>
+            <div className=" me-3">
+              <div className="d-flex">
+                <div className="my-4 me-3">{user?.email}</div>
+                <Link to='/profile'>
+                <img
+                  src={userIcon}
+                  alt="Logo"
+                  style={{ width: "50px", height: "50px",cursor: "pointer" }}
+                  className="my-2 me-3"
+                />
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* <div className="d-flex align-items-center">

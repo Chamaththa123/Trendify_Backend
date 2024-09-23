@@ -360,5 +360,24 @@ namespace WebService.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            try
+            {
+                var user = await _userService.GetUserById(id);
+                if (user == null)
+                {
+                    return NotFound(new { Message = "User not found." });
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching the user", Details = ex.Message });
+            }
+        }
+
     }
 }
