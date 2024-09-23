@@ -20,5 +20,10 @@ namespace WebService.Interfaces
         Task<List<User>> GetVendors();
         Task<List<User>> GetCSRs();
         Task<List<User>> GetCustomers();
+        Task<List<User>> GetPendingCustomers();
+
+        Task<bool> ChangePassword(string email, string currentPassword, string newPassword);
+
+        Task<bool> UpdateUserDetails(string id, User updatedUser);
     }
 }

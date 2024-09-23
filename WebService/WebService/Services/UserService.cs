@@ -38,10 +38,22 @@ namespace WebService.Services
             var user = await GetUserByEmail(email);
             if (user != null && VerifyPassword(password, user.PasswordHash))
             {
-                return user;
+                if (user.IsActive == 1)
+                {
+                    return user; // User is active and can log in
+                }
+                else if (user.IsActive == 2)
+                {
+                    throw new UnauthorizedAccessException("Your account is inactive. Please contact support.");
+                }
+                else if (user.IsActive == 0)
+                {
+                    throw new UnauthorizedAccessException("Your account is pending approval.");
+                }
             }
-            return null;
+            return null; // Invalid credentials or user not found
         }
+
 
         private string HashPassword(string password)
         {
@@ -80,10 +92,23 @@ namespace WebService.Services
 
             if (user != null)
             {
-                user.IsActive = !user.IsActive;
+                if (user.IsActive == 1)
+                {
+                    user.IsActive = 2; // Deactivate
+                }
+                else if (user.IsActive == 2)
+                {
+                    user.IsActive = 1; // Activate
+                }
+                else if (user.IsActive == 0)
+                {
+                    user.IsActive = 1; // Pending to Activate
+                }
+
                 await _userCollection.ReplaceOneAsync(x => x.Id == id, user);
             }
         }
+
 
         // Get vendors (role = 3)
         public async Task<List<User>> GetVendors()
@@ -99,7 +124,47 @@ namespace WebService.Services
 
         public async Task<List<User>> GetCustomers()
         {
-            return await _userCollection.Find(x => x.Role == "0").ToListAsync();
+            return await _userCollection.Find(x => x.Role == "0" && x.IsActive != 0).ToListAsync();
         }
+
+        public async Task<List<User>> GetPendingCustomers()
+        {
+            return await _userCollection.Find(x => x.Role == "0" && x.IsActive == 0).ToListAsync();
+        }
+
+        public async Task<bool> ChangePassword(string email, string currentPassword, string newPassword)
+        {
+            // Find the user by email
+            var user = await GetUserByEmail(email);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            // Update the user's password in the database
+            await _userCollection.ReplaceOneAsync(x => x.Id == user.Id, user);
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserDetails(string id, User updatedUser)
+        {
+            var user = await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            user.First_Name = updatedUser.First_Name;
+            user.Last_Name = updatedUser.Last_Name;
+            user.Email = updatedUser.Email;
+            user.NIC = updatedUser.NIC;
+            user.Address = updatedUser.Address;
+            user.Role = updatedUser.Role;
+
+            var result = await _userCollection.ReplaceOneAsync(x => x.Id == id, user);
+            return result.ModifiedCount > 0;
+        }
+
     }
 }

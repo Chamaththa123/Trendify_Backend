@@ -62,8 +62,35 @@ namespace WebService.Controllers
                     return BadRequest(new { Message = "The following fields are required:", EmptyFields = emptyFields });
                 }
 
+                // Check if the email already exists
+                var existingUser = await _userService.GetUserByEmail(newUser.Email);
+                if (existingUser != null)
+                {
+                    return Conflict(new { Message = "Email is already in use." });
+                }
+
+                // Set Pending (0) only for role = 0
+                if (newUser.Role == "0")
+                {
+                    newUser.IsActive = 0;
+                }
+                else
+                {
+                    newUser.IsActive = 1; 
+                }
+
+                // Set averageRating only for role = 3
+                if (newUser.Role == "3")
+                {
+                    newUser.AverageRating = 0; // Initialize averageRating for role 3 users
+                }
+                else
+                {
+                    newUser.AverageRating = null; // Ensure averageRating is not set for other roles
+                }
+
                 await _userService.RegisterUser(newUser);
-                return CreatedAtAction(nameof(Login), new { email = newUser.Email,message="User is registered Succuessfully !!" }, newUser);
+                return CreatedAtAction(nameof(Login), new { email = newUser.Email, message = "User is registered successfully!" }, newUser);
             }
             catch (Exception ex)
             {
@@ -87,17 +114,21 @@ namespace WebService.Controllers
                     return Unauthorized("Invalid email or password");
                 }
 
-                if (!user.IsActive)
+                // Check IsActive status
+                if (user.IsActive == 2)
                 {
-                    return Unauthorized("Your account is deactivated. Please contact support.");
+                    return Unauthorized("Your account is inactive. Please contact support.");
+                }
+                else if (user.IsActive == 0)
+                {
+                    return Unauthorized("Your account is pending approval.");
                 }
 
                 var token = GenerateJwtToken(user);
 
-                var UserDetails = new
+                var userDetails = new
                 {
                     user.Id,
-                    user.Username,
                     user.First_Name,
                     user.Last_Name,
                     user.Email,
@@ -107,55 +138,45 @@ namespace WebService.Controllers
                     user.IsActive
                 };
 
-                return Ok(new { Token = token,user= UserDetails, Message = "user is logined successfully" });
+                return Ok(new { Token = token, user = userDetails, Message = "User logged in successfully" });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { Message = "An error occurred during login", Details = ex.Message });
-
             }
-           
         }
 
         private string GenerateJwtToken(User user)
         {
             try
             {
-                // Add user details as claims
                 var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),  // Email as a subject
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),  // Unique Token ID
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.GivenName, user.First_Name),
                     new Claim(ClaimTypes.Surname, user.Last_Name),
                     new Claim(ClaimTypes.Role, user.Role),
-
-                    // Custom claim types
                     new Claim("NIC", user.NIC),
                     new Claim("Address", user.Address),
                     new Claim("IsActive", user.IsActive.ToString())
-        };
+                };
 
-                // Create the key from the secret
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                // Generate the token
                 var token = new JwtSecurityToken(
                     issuer: "your_app",
                     audience: "your_app",
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),  // Set token expiration time
+                    expires: DateTime.UtcNow.AddHours(1),
                     signingCredentials: creds);
 
-                // Return the generated token
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }
             catch (Exception ex)
             {
-                // Handle token generation errors
                 throw new InvalidOperationException("Failed to generate JWT token.", ex);
             }
         }
@@ -166,11 +187,11 @@ namespace WebService.Controllers
             try
             {
                 var users = await _userService.GetAllUsers(role);
-
                 return users;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Fail to get all users", ex);
+                throw new InvalidOperationException("Failed to get all users", ex);
             }
         }
 
@@ -181,16 +202,16 @@ namespace WebService.Controllers
             {
                 var user = await _userService.GetUserById(id);
 
-                if (user is null)
+                if (user == null)
                 {
                     return NotFound();
                 }
 
                 await _userService.ChangeUserStatus(id);
-
                 return NoContent();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return StatusCode(500, new { Message = "An error occurred during changing user status", Details = ex.Message });
             }
         }
@@ -235,8 +256,109 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "An error occurred while fetching CSRs", Details = ex.Message });
+                return StatusCode(500, new { Message = "An error occurred while fetching customers", Details = ex.Message });
             }
         }
+
+        [HttpGet("customers/pending")]
+        public async Task<IActionResult> GetPendingCustomers()
+        {
+            try
+            {
+                var customers = await _userService.GetPendingCustomers();
+                return Ok(customers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching customers", Details = ex.Message });
+            }
+        }
+
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest changePasswordRequest)
+        {
+            try
+            {
+                // Validate input
+                if (string.IsNullOrEmpty(changePasswordRequest.Email) ||
+                    string.IsNullOrEmpty(changePasswordRequest.CurrentPassword) ||
+                    string.IsNullOrEmpty(changePasswordRequest.NewPassword))
+                {
+                    return BadRequest("Email, current password, and new password are required.");
+                }
+
+                // Check if the email exists in the system
+                var user = await _userService.GetUserByEmail(changePasswordRequest.Email);
+                if (user == null)
+                {
+                    return NotFound("User with this email does not exist.");
+                }
+
+                // Call the service to change the password
+                var result = await _userService.ChangePassword(
+                    changePasswordRequest.Email,
+                    changePasswordRequest.CurrentPassword,
+                    changePasswordRequest.NewPassword);
+
+                if (result)
+                {
+                    return Ok(new { Message = "Password changed successfully." });
+                }
+
+                return StatusCode(500, "An error occurred while changing the password.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred during password change", Details = ex.Message });
+            }
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateUserDetails(string id, [FromBody] User updatedUser)
+        {
+            try
+            {
+                // Validate the updated user object
+                if (updatedUser == null || string.IsNullOrEmpty(id))
+                {
+                    return BadRequest("Invalid user data.");
+                }
+
+                // Check if the user exists
+                var existingUser = await _userService.GetUserById(id);
+                if (existingUser == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                // Check if email is changing and if it already exists in another user
+                if (updatedUser.Email != existingUser.Email)
+                {
+                    var emailCheckUser = await _userService.GetUserByEmail(updatedUser.Email);
+                    if (emailCheckUser != null)
+                    {
+                        return Conflict("Email is already in use by another account.");
+                    }
+                }
+
+                // Call the service to update user details (excluding password)
+                var result = await _userService.UpdateUserDetails(id, updatedUser);
+                if (result)
+                {
+                    return Ok(new { Message = "User details updated successfully." });
+                }
+
+                return StatusCode(500, "An error occurred while updating the user details.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred", Details = ex.Message });
+            }
+        }
+
     }
 }
