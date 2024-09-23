@@ -7,6 +7,7 @@ import SignIn from "../pages/users/SignIn";
 import ProtectedRoute from "./ProtectedRoute";
 import { Vendors } from "../pages/users/Vendors";
 import { Csr } from "../pages/users/Csr";
+import { ViewProduct } from "../pages/products/ViewProduct";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute roles={['1', '3']}>
             <Products />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/products/view/:id",
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <ViewProduct />
           </ProtectedRoute>
         ),
       },

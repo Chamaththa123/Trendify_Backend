@@ -14,9 +14,31 @@ namespace WebService.Controllers
             _productService = productService;
 
         [HttpGet]
-        public async Task<List<Product>> GetProduct() =>
-            await _productService.GetProduct();
+        public async Task<ActionResult<List<Product>>> GetProduct()
+        {
+            var products = await _productService.GetProduct();
 
+            if (products == null || products.Count == 0)
+            {
+                return NotFound(new { Message = "No products found." });
+            }
+
+            return Ok(products.Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.Price,
+                p.Description,
+                p.Stock,
+                p.LowStockLvl,
+                StockStatus = p.StockStatus, // Include stock status in response
+                p.Image,
+                p.IsActive,
+                p.ProductListName
+            }));
+        }
+
+        // Get product by ID with stock status
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductById(string id)
         {
@@ -27,7 +49,19 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            return product;
+            return Ok(new
+            {
+                product.Id,
+                product.Name,
+                product.Price,
+                product.Description,
+                product.Stock,
+                product.LowStockLvl,
+                StockStatus = product.StockStatus, // Include stock status in response
+                product.Image,
+                product.IsActive,
+                product.ProductListName
+            });
         }
 
         [HttpPost]
@@ -85,7 +119,7 @@ namespace WebService.Controllers
         }
 
         [HttpPut("stocks/update/{id}")]
-        public async Task<IActionResult> UpdateStock(string id, [FromBody] int additionalStock)
+        public async Task<IActionResult> UpdateStock(string id, [FromBody] StockUpdate stockUpdate)
         {
             var product = await _productService.GetProductById(id);
 
@@ -94,11 +128,21 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            await _productService.UpdateStock(id, additionalStock);
+            if (stockUpdate.Type == 1)
+            {
+                // Add stock
+                await _productService.UpdateStock(id, stockUpdate.StockChange);
+            }
+            else if (stockUpdate.Type == 0)
+            {
+                // Reduce stock
+                await _productService.UpdateStock(id, -stockUpdate.StockChange);
+            }
+
             return NoContent();
         }
 
-        [HttpPut("stocks/reset{id}")]
+        [HttpPut("stocks/reset/{id}")]
         public async Task<IActionResult> ResetStock(string id)
         {
             var product = await _productService.GetProductById(id);

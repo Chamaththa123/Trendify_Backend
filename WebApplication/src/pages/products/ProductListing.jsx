@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import axiosClient from "../../../axios-client";
 import { tableHeaderStyles } from "../../utils/dataArrays";
-import { ChangeIcon, EditNewIcon } from "../../utils/icons";
+import { ChangeIcon, DeleteIcon, EditNewIcon } from "../../utils/icons";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export const ProductListing = ({ id, title }) => {
@@ -37,7 +37,7 @@ export const ProductListing = ({ id, title }) => {
     setErrors({});
   };
 
-  //Fetching current zones
+  //Fetching current product list
   useEffect(() => {
     const fetchProductList = () => {
       axiosClient
@@ -156,6 +156,48 @@ export const ProductListing = ({ id, title }) => {
       });
   };
 
+  const handleDelete = (productList) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#3085d6'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosClient
+          .delete(`ProductLists/${productList.id}`)
+          .then((response) => {
+            handleLoading();
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "Product List deleted successfully.",
+            });
+          })
+          .catch((error) => {
+            console.error("Error deleting product list:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong while deleting the product list.",
+            });
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          icon: "info",
+          title: "Cancelled",
+          text: "Your product list is safe.",
+        });
+      }
+    });
+  };
+  
+
   useEffect(() => {
     // Destroy any previous tooltips to avoid duplication or issues
     const existingTooltips = document.querySelectorAll(".tooltip");
@@ -179,7 +221,8 @@ export const ProductListing = ({ id, title }) => {
     {
       name: "Name",
       selector: (row) => row.name,
-      wrap: false,
+      wrap: true,
+      compact: true,
       maxWidth: "auto",
       cellStyle: {
         whiteSpace: "normal",
@@ -189,7 +232,9 @@ export const ProductListing = ({ id, title }) => {
     {
       name: "Description",
       selector: (row) => row.description,
-      wrap: false,
+      wrap: true,
+      compact: true,
+      maxWidth: "auto",
       cellStyle: {
         whiteSpace: "normal",
         wordBreak: "break-word",
@@ -213,20 +258,29 @@ export const ProductListing = ({ id, title }) => {
           <button
             className="edit-btn me-4"
             onClick={() => handleEditProductList(row)}
-            title="Edit Product"
+            title="Edit List"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
           >
             <EditNewIcon />
           </button>
           <button
-            className="edit-btn"
+            className="edit-btn me-4"
             onClick={() => handleStatusChange(row)}
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="Change Status"
           >
             <ChangeIcon />
+          </button>
+          <button
+            className="edit-btn"
+            onClick={() => handleDelete(row)}
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Delete List"
+          >
+            <DeleteIcon />
           </button>
         </div>
       ),

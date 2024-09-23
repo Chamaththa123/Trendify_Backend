@@ -196,3 +196,12 @@ div.content {
   width: 60px;
   text-align: center;
 }
+
+.view-text1{
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.view-details1{
+  font-size: 15px;
+}

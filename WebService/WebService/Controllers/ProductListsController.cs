@@ -19,6 +19,10 @@ namespace WebService.Controllers
         public async Task<List<Product_List>> GetProductList() =>
             await _productListService.GetProductList();
 
+        [HttpGet("active")]
+        public async Task<List<Product_List>> GetActiveProductList() =>
+            await _productListService.GetActiveProductList();
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Product_List>> GetProductListById(string id)
         {

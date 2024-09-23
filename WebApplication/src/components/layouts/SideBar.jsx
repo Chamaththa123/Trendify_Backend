@@ -16,6 +16,7 @@ export const SideBar = ({
   const sidebarItems = user?.role === "1" ? adminSidebarItems : userSidebarItems;
   
   const isUsersSectionActive = location.pathname.startsWith('/users');
+  const isProductSectionActive = location.pathname.startsWith('/products');
 
   return (
     <div>
@@ -25,7 +26,10 @@ export const SideBar = ({
         </div>
 
         {sidebarItems.slice(0, 8).map((item, itemIndex) => {
-               const isActive = location.pathname === item.link || (item.link === "/users/vendors" && isUsersSectionActive);
+          const isActive = location.pathname === item.link || 
+            (item.link === "/users/vendors" && isUsersSectionActive) || 
+            (item.link.startsWith('/products') && isProductSectionActive); // Check for any product route
+
           const NavIcon = item.icon;
           return (
             <a
@@ -35,7 +39,7 @@ export const SideBar = ({
               onClick={handleSidebar}
             >
               <NavIcon color={isActive ? "white" : "#64728C"} width={20} height={20}/>
-              <span style={{marginLeft:"15px"}}> {item.title}</span>
+              <span style={{ marginLeft: "15px" }}>{item.title}</span>
             </a>
           );
         })}

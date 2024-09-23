@@ -10,9 +10,6 @@ namespace WebService.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
-        [Required(ErrorMessage = "User Name is required.")]
-        public string Username { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "First Name is required.")]
         public string First_Name { get; set; } = string.Empty;
 
@@ -33,8 +30,9 @@ namespace WebService.Models
 
         public string Role { get; set; } = string.Empty;
 
-        public double AverageRating { get; set; } = 0;
+        public double? AverageRating { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        [Required]
+        public int IsActive { get; set; } = 0;
     }
 }
