@@ -4,7 +4,7 @@ import { UserIcon } from "@heroicons/react/24/solid";
 import { SideBar } from "./SideBar";
 import { useStateContext } from "../../contexts/NavigationContext";
 import { subPathLinks } from "../../utils/dataArrays";
-import { ArrowBack } from "../../utils/icons";
+import { ArrowBack, NotificationIcon } from "../../utils/icons";
 import userIcon from "../../assets/images/user.png";
 
 export const MainLayout = () => {
@@ -117,7 +117,7 @@ export const MainLayout = () => {
             <div className="main-path">{mainPath}</div>
             <div className=" me-3">
               <div className="d-flex">
-                <div className="my-4 me-3">{user?.email}</div>
+                <div className="my-3 me-5"><NotificationIcon/></div>
                 <Link to='/profile'>
                 <img
                   src={userIcon}
