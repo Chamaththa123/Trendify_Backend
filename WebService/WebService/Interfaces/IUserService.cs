@@ -19,5 +19,6 @@ namespace WebService.Interfaces
 
         Task<List<User>> GetVendors();
         Task<List<User>> GetCSRs();
+        Task<List<User>> GetCustomers();
     }
 }

@@ -224,5 +224,19 @@ namespace WebService.Controllers
                 return StatusCode(500, new { Message = "An error occurred while fetching CSRs", Details = ex.Message });
             }
         }
+
+        [HttpGet("customers")]
+        public async Task<IActionResult> GetCustomers()
+        {
+            try
+            {
+                var customers = await _userService.GetCustomers();
+                return Ok(customers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching CSRs", Details = ex.Message });
+            }
+        }
     }
 }

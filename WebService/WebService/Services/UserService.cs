@@ -96,5 +96,10 @@ namespace WebService.Services
         {
             return await _userCollection.Find(x => x.Role == "2").ToListAsync();
         }
+
+        public async Task<List<User>> GetCustomers()
+        {
+            return await _userCollection.Find(x => x.Role == "0").ToListAsync();
+        }
     }
 }

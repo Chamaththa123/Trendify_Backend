@@ -36,6 +36,12 @@ namespace WebService.Services
             return await _productListCollection.Find(_ => true).ToListAsync();
         }
 
+        //get all product lists
+        public async Task<List<Product_List>> GetActiveProductList()
+        {
+            return await _productListCollection.Find(x => x.IsActive == true).ToListAsync();
+        }
+
         //get specific product list
         public async Task<Product_List?> GetProductListById(string id)
         {

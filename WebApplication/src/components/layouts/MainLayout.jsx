@@ -12,10 +12,10 @@ export const MainLayout = () => {
   const dropdownRef = useRef(null);
   const sideBardownRef = useRef(null);
   const sideBarButtondownRef = useRef(null);
-  const { token, setUser, setToken,user } = useStateContext();
+  const { token, setUser, setToken, user } = useStateContext();
 
-  console.log('user',user);
-  console.log('token',token);
+  console.log("user", user);
+  console.log("token", token);
   const handleLogout = () => {
     setUser(null);
     setToken(null);
@@ -63,18 +63,22 @@ export const MainLayout = () => {
       mainPath = "Dashboard";
       subPaths = ["Back", "New Job"];
       break;
-      case "/products":
-        mainPath = "Products";
-        subPaths = ["Back", "Product", "Product Listing"];
-        break;
-        case "/users/vendors":
-          mainPath = "Users";
-          subPaths = ["Back", "Vendor", "CSR"];
-          break;
-          case "/users/csr":
-            mainPath = "Users";
-            subPaths = ["Back", "Vendor", "CSR"];
-            break;
+    case "/products":
+      mainPath = "Products";
+      subPaths = ["Back"];
+      break;
+    case `/products/view/${id}`:
+      mainPath = "Products";
+      subPaths = ["Back"];
+      break;
+    case "/users/vendors":
+      mainPath = "Users";
+      subPaths = ["Back", "Vendor", "CSR"];
+      break;
+    case "/users/csr":
+      mainPath = "Users";
+      subPaths = ["Back", "Vendor", "CSR"];
+      break;
     default:
       break;
   }
@@ -98,10 +102,10 @@ export const MainLayout = () => {
         className={`main-content transition-all duration-300 flex-grow-1`}
       >
         <div className="header">
-        <div className="d-flex justify-content-between">
-  <div className="main-path">{mainPath}</div>
-  <div className="my-4 me-3">{user?.username}</div>
-</div>
+          <div className="d-flex justify-content-between">
+            <div className="main-path">{mainPath}</div>
+            <div className="my-4 me-3">{user?.username}</div>
+          </div>
 
           {/* <div className="d-flex align-items-center">
               <div className="position-relative" ref={dropdownRef}>

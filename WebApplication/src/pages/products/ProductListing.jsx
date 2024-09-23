@@ -37,7 +37,7 @@ export const ProductListing = ({ id, title }) => {
     setErrors({});
   };
 
-  //Fetching current zones
+  //Fetching current product list
   useEffect(() => {
     const fetchProductList = () => {
       axiosClient

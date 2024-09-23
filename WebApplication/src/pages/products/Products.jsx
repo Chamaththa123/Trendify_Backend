@@ -16,8 +16,11 @@ import { ChangeIcon, DeleteIcon, EditNewIcon } from "../../utils/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
 import { UpdateStock } from "./UpdateStock";
+import { AddProduct } from "./AddProduct";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Products = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [productTableLoading, setProductTableLoading] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState("");
@@ -179,7 +182,6 @@ export const Products = () => {
     {
       name: "Stock",
       selector: (row) => row.stock,
-      wrap: false,
       wrap: true,
       compact: true,
       maxWidth: "auto",
@@ -203,11 +205,17 @@ export const Products = () => {
       name: "Stock Status",
       selector: (row) =>
         row.stockStatus === "Out of Stock" ? (
-          <div className="status-inactive-btn">No Stock</div>
+          <div className="status-inactive-btn" style={{ width: "70px" }}>
+            No Stock
+          </div>
         ) : row.stockStatus === "In Stock" ? (
-          <div className="status-active-btn">In Stock</div>
+          <div className="status-active-btn" style={{ width: "70px" }}>
+            In Stock
+          </div>
         ) : row.stockStatus === "Low Stock" ? (
-          <div className="status-active-btn">Low Stock</div>
+          <div className="status-active-btn" style={{ width: "70px" }}>
+            Low Stock
+          </div>
         ) : null,
       wrap: true,
       compact: true,
@@ -233,15 +241,16 @@ export const Products = () => {
       name: "Action",
       cell: (row) => (
         <div>
-          <button
-            className="edit-btn me-1"
-            // onClick={() => handleEditProductList(row)}
-            title="Edit Product"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-          >
-            <ViewIcon />
-          </button>
+          <Link to={`/products/view/${row.id}`}>
+            <button
+              className="edit-btn me-1"
+              title="Edit Product"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+            >
+              <ViewIcon />
+            </button>
+          </Link>
           <button
             className="edit-btn me-1"
             onClick={() => handleStatusChange(row)}
@@ -287,9 +296,9 @@ export const Products = () => {
             className="edit-btn me-1"
             onClick={() => handleUpdateStock(row)}
             type="button"
-            data-bs-toggle="modal tooltip"
+            data-bs-toggle="modal"
             data-bs-target="#updateStockModel"
-             title="Update Stock"
+            title="Update Stock"
           >
             <UpdateStockIcon />
           </button>
@@ -365,7 +374,7 @@ export const Products = () => {
                 className="modal-btn"
                 type="button"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModalCenter"
+                data-bs-target="#addProductModal"
               >
                 <AddIcon />
                 &nbsp;Add Product
@@ -393,10 +402,15 @@ export const Products = () => {
       </div>
 
       <ProductListing id="exampleModalCenter" title="Product Listing" />
+      <AddProduct
+        id="addProductModal"
+        title="Add Product"
+        handleLoading={handleLoading}
+      />
       <UpdateStock
         id="updateStockModel"
         title="Update Product Stock"
-        productId={selectedProductId} 
+        productId={selectedProductId}
         handleLoading={handleLoading}
       />
     </section>
