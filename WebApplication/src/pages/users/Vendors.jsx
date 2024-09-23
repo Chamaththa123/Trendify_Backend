@@ -70,6 +70,8 @@ export const Vendors = () => {
       showCancelButton: true,
       confirmButtonText: "Yes, change it!",
       cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#d33",
+        confirmButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosClient

@@ -9,6 +9,8 @@ import { Vendors } from "../pages/users/Vendors";
 import { Csr } from "../pages/users/Csr";
 import { ViewProduct } from "../pages/products/ViewProduct";
 import { UserProfile } from "../pages/users/UserProfile";
+import {Customer} from "../pages/customers/Customer";
+import { PendingCustomer } from "../pages/customers/PendingCustomer";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute roles={['1', '3']}>
             <UserProfile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/customers/approved",
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <Customer />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/customers/pending",
+        element: (
+          <ProtectedRoute roles={['1', '3']}>
+            <PendingCustomer />
           </ProtectedRoute>
         ),
       },
