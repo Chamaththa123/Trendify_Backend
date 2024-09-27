@@ -51,20 +51,15 @@ builder.Services.AddSingleton<IProductService, ProductService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IRankingComment, RankingCommentService>();
 builder.Services.AddSingleton<IOrderService, OrderService>();
+builder.Services.AddSingleton<INotificationService, NotificationService>();
 
 
 builder.Services.AddControllers();
 
 // Configure CORS
-builder.Services.AddCors(options =>
+builder.Services.AddCors(c =>
 {
-    options.AddPolicy("AllowReactApp",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")  // The URL of your React app
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 
@@ -96,7 +91,7 @@ builder.Services.AddAuthentication(x =>
 var app = builder.Build();
 
 // Enable CORS
-app.UseCors("AllowReactApp");
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
