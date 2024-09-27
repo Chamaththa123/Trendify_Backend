@@ -13,16 +13,19 @@ namespace WebService.Services
         // Initializes a new instance of the ProductService class.
         private readonly IMongoCollection<Product> _productCollection;
         private readonly IMongoCollection<Product_List> _productListCollection;
+        private readonly INotificationService _notificationService;
 
         // define mongodb collection name
         private const string CollectionName = "product";
 
-        public ProductService(IOptions<MongoDBSettings> mongoDBSettings, IMongoClient mongoClient)
+        public ProductService(IOptions<MongoDBSettings> mongoDBSettings, IMongoClient mongoClient, INotificationService notificationService)
         {
             // Initialize the MongoDB collection
             var mongoDatabase = mongoClient.GetDatabase(mongoDBSettings.Value.DatabaseName);
             _productCollection = mongoDatabase.GetCollection<Product>(CollectionName);
             _productListCollection = mongoDatabase.GetCollection<Product_List>("product_list");
+
+            _notificationService = notificationService;
         }
 
         // Creates a new  product 
@@ -114,6 +117,19 @@ namespace WebService.Services
 
             product.Stock += additionalStock;
             await _productCollection.ReplaceOneAsync(x => x.Id == id, product);
+
+            // Check if stock is low
+            if (product.Stock <= product.LowStockLvl)
+            {
+                // Generate notification
+                var notification = new Notification
+                {
+                    ReceiverId = product.Product_idVendor, // Product's vendor is the receiver
+                    Message = $"Product '{product.Name}' is running low on stock. Current stock: {product.Stock}"
+                };
+
+                await _notificationService.CreateNotification(notification);
+            }
         }
 
         // Reset stock to zero

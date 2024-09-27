@@ -4,8 +4,13 @@ import axiosClient from "../../../axios-client";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { customSelectStyles } from "../../utils/dataArrays";
 import Select from "react-select";
+import { useStateContext } from "../../contexts/NavigationContext";
 
 export const AddProduct = ({ id, userType, handleLoading }) => {
+  
+  const { user } = useStateContext();
+  const userId = user.id;
+  
   const initialFormData = {
     name: "",
     product_idProductList: "",
@@ -14,6 +19,7 @@ export const AddProduct = ({ id, userType, handleLoading }) => {
     stock: 0,
     lowStockLvl: 0,
     image: "",
+    Product_idVendor:userId
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -111,7 +117,7 @@ export const AddProduct = ({ id, userType, handleLoading }) => {
           text: `Product added successfully!`,
         });
         setFormData(initialFormData);
-        // handleLoading();
+        handleLoading();
       } catch (error) {
         Swal.fire({
           icon: "error",

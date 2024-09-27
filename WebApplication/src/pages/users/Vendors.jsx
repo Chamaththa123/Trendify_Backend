@@ -70,6 +70,8 @@ export const Vendors = () => {
       showCancelButton: true,
       confirmButtonText: "Yes, change it!",
       cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#d33",
+        confirmButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosClient
@@ -161,9 +163,9 @@ export const Vendors = () => {
     {
       name: "Status",
       selector: (row) =>
-        row.isActive === false ? (
+        row.isActive === 2 ? (
           <div className="status-inactive-btn">Inactive</div>
-        ) : row.isActive === true ? (
+        ) : row.isActive === 1 ? (
           <div className="status-active-btn">Active</div>
         ) : null,
       wrap: false,

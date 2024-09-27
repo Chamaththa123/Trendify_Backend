@@ -17,6 +17,10 @@ namespace WebService.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Product_idProductList { get; set; }
 
+        [Required(ErrorMessage = "vendor is required.")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Product_idVendor { get; set; }
+
         [Required(ErrorMessage = "Price is required.")]
         public decimal Price { get; set; }
 

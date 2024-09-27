@@ -17,6 +17,7 @@ export const SideBar = ({
   
   const isUsersSectionActive = location.pathname.startsWith('/users');
   const isProductSectionActive = location.pathname.startsWith('/products');
+  const isCustomerSectionActive = location.pathname.startsWith('/customers');
 
   return (
     <div>
@@ -28,7 +29,8 @@ export const SideBar = ({
         {sidebarItems.slice(0, 8).map((item, itemIndex) => {
           const isActive = location.pathname === item.link || 
             (item.link === "/users/vendors" && isUsersSectionActive) || 
-            (item.link.startsWith('/products') && isProductSectionActive); // Check for any product route
+            (item.link.startsWith('/products') && isProductSectionActive)|| 
+            (item.link.startsWith('/customers') && isCustomerSectionActive);
 
           const NavIcon = item.icon;
           return (

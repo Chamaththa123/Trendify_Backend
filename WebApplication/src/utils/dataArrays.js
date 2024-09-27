@@ -1,4 +1,4 @@
-import { DashboardIcon, EstateIcon, ProductIcon, SupplierIcon, UserIcon } from "./icons";
+import { CustomerIcon, DashboardIcon, EstateIcon, ProductIcon, SupplierIcon, UserIcon } from "./icons";
 
 export const newNavigationItems = [
   {
@@ -29,13 +29,16 @@ export const adminSidebarItems = [
 
 export const userSidebarItems = [
   { title: "Dashboard", link: "/", icon: DashboardIcon },
+  { title: "Customers", link: "/customers/approved", icon: CustomerIcon }, 
   { title: "Products", link: "/products", icon: ProductIcon }, 
-  { title: "Users", link: "/users/vendors", icon: UserIcon }, 
+  { title: "Users", link: "/users/vendors", icon: UserIcon },
 ];
 
 export const subPathLinks = {
   "Vendor": "/users/vendors",
   "CSR": "/users/csr",
+  "Approved Customers": "/customers/approved",
+  "Pending Customers": "/customers/pending",
 };
 
 export const tableHeaderStyles = {
