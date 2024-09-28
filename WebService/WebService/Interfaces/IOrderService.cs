@@ -12,5 +12,7 @@ namespace WebService.Interfaces
         Task<Order?> ApproveOrderCancellation(string id);
         Task<List<Order>> GetCancelRequests();
         Task<List<Order>> GetApprovedCancellations();
+
+        Task<List<Order>> GetOrdersByVendorId(string vendorId);
     }
 }

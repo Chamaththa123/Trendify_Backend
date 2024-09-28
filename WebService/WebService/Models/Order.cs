@@ -50,5 +50,8 @@ namespace WebService.Models
 
         [Required]
         public decimal Total { get; set; }
+
+        [Required]
+        public bool IsDelivered { get; set; } = false;
     }
 }

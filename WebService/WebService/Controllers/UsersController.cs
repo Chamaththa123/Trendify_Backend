@@ -16,11 +16,13 @@ namespace WebService.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly INotificationService _notificationService;
         private readonly string _jwtSecret = "M2Y2YTc4ZGE0ZGI5ZDE1NjM5ZGVkMzk2MWE5NmU3YmFiOWEyOTkwM2M5NzQzZmUzZWQ4ZjllMzZjOGUyM2M="; // Should be in configuration
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, INotificationService notificationService)
         {
             _userService = userService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("register")]
@@ -73,7 +75,19 @@ namespace WebService.Controllers
                 if (newUser.Role == "0")
                 {
                     newUser.IsActive = 0;
+
+                    // Generate notification
+                    var notificationMessage = $"New customer registration: {newUser.First_Name} {newUser.Last_Name} has registered with the email {newUser.Email}. Please review and approve the account.";
+                    var notification = new Notification
+                    {
+                        IsVisibleToCSR = true,
+                        IsVisibleToAdmin = true,
+                        Message = notificationMessage
+                    };
+
+                    await _notificationService.CreateNotification(notification);
                 }
+
                 else
                 {
                     newUser.IsActive = 1; 
@@ -90,6 +104,11 @@ namespace WebService.Controllers
                 }
 
                 await _userService.RegisterUser(newUser);
+
+                if (newUser.Role == "3")
+                {
+                    newUser.AverageRating = 0; // Initialize averageRating for role 3 users
+                }
                 return CreatedAtAction(nameof(Login), new { email = newUser.Email, message = "User is registered successfully!" }, newUser);
             }
             catch (Exception ex)
@@ -100,6 +119,61 @@ namespace WebService.Controllers
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        {
+            try
+            {
+                if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
+                {
+                    return BadRequest("Email and password are required");
+                }
+
+                var user = await _userService.AuthenticateUser(loginRequest.Email, loginRequest.Password);
+                if (user == null)
+                {
+                    return Unauthorized("Invalid email or password");
+                }
+
+                // Check if the user role is either 1, 2, or 3
+                if (user.Role != "1" && user.Role != "2" && user.Role != "3")
+                {
+                    return Unauthorized("Access denied. Only users with roles 1, 2, or 3 can log in.");
+                }
+
+                // Check IsActive status
+                if (user.IsActive == 2)
+                {
+                    return Unauthorized("Your account is inactive. Please contact support.");
+                }
+                else if (user.IsActive == 0)
+                {
+                    return Unauthorized("Your account is pending approval.");
+                }
+
+                var token = GenerateJwtToken(user);
+
+                var userDetails = new
+                {
+                    user.Id,
+                    user.First_Name,
+                    user.Last_Name,
+                    user.Email,
+                    user.NIC,
+                    user.Address,
+                    user.Role,
+                    user.IsActive
+                };
+
+                return Ok(new { Token = token, user = userDetails, Message = "User logged in successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred during login", Details = ex.Message });
+            }
+        }
+
+
+        [HttpPost("customer-login")]
+        public async Task<IActionResult> CustomerLogin([FromBody] LoginRequest loginRequest)
         {
             try
             {
@@ -138,13 +212,15 @@ namespace WebService.Controllers
                     user.IsActive
                 };
 
-                return Ok(new { Token = token, user = userDetails, Message = "User logged in successfully" });
+                return Ok(new { Token = token, user = userDetails, Message = "Customer logged in successfully" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "An error occurred during login", Details = ex.Message });
+                return StatusCode(500, new { Message = "An error occurred during customer login", Details = ex.Message });
             }
         }
+
+
 
         private string GenerateJwtToken(User user)
         {
