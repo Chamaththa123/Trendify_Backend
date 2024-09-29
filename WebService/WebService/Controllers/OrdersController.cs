@@ -26,30 +26,20 @@ namespace WebService.Controllers
         {
             try
             {
+                // Set the total price for each item and the order
                 foreach (var item in newOrder.OrderItems)
                 {
-                    var id = item.ProductId;
-                    // Fetch the product to get its price (if required)
-                    var product = await _productService.GetProductById(id);
-
-                    if (product == null)
-                    {
-                        throw new Exception($"Product with ID {item.ProductId} does not exist.");
-                    }
-
-                    // Set the total price for each item
                     item.Total = item.UnitPrice * item.Quantity;
-
                 }
 
-                // Calculate the total price of the order
                 newOrder.TotalPrice = newOrder.OrderItems.Sum(i => i.Total);
                 newOrder.Date = DateTime.UtcNow;
-
                 newOrder.OrderItemCount = newOrder.OrderItems.Count;
 
+                // Initially, the status is "Pending"
                 newOrder.Status = 0;
 
+                // Save the new order in the database
                 var createdOrder = await _orderService.CreateOrder(newOrder);
                 return Ok(createdOrder);
             }
@@ -86,40 +76,23 @@ namespace WebService.Controllers
             try
             {
                 var existingOrder = await _orderService.GetOrderById(id);
-
                 if (existingOrder == null)
                 {
                     return NotFound(new { message = "Order not found" });
                 }
 
-                if (existingOrder.CustomerId != updatedOrder.CustomerId)
-                {
-                    return Unauthorized(new { message = "You are not authorized to update this order." });
-                }
-
-                // Check if the order has already been delivered
-                if (existingOrder.Status == 2)
-                {
-                    return BadRequest(new { message = "Cannot update order. The order has already been delivered." });
-                }
-
-                // Update order items
                 foreach (var item in updatedOrder.OrderItems)
                 {
-                    var product = await _productService.GetProductById(item.ProductId);
-
-                    if (product == null)
-                    {
-                        return BadRequest(new { message = $"Product with ID {item.ProductId} does not exist." });
-                    }
-
                     item.Total = item.UnitPrice * item.Quantity;
                 }
 
                 updatedOrder.TotalPrice = updatedOrder.OrderItems.Sum(i => i.Total);
                 updatedOrder.OrderItemCount = updatedOrder.OrderItems.Count;
-                updatedOrder.Status = existingOrder.Status; // Maintain the current status
 
+                // Update the order status based on delivery of products
+                UpdateOrderStatusBasedOnItems(updatedOrder);
+
+                // Save the updated order in the database
                 var updatedOrderResult = await _orderService.UpdateOrder(id, updatedOrder);
 
                 if (updatedOrderResult == null)
@@ -279,6 +252,109 @@ namespace WebService.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        // Vendor marks a product as delivered
+        [HttpPatch("{orderId}/vendor/{vendorId}/product/{productId}/deliver")]
+        public async Task<IActionResult> MarkProductAsDelivered(string orderId, string vendorId, string productId)
+        {
+            try
+            {
+                var order = await _orderService.GetOrderById(orderId);
+                if (order == null)
+                {
+                    return NotFound(new { message = "Order not found" });
+                }
+
+                // Find the order item belonging to the given vendor and product
+                var orderItem = order.OrderItems.FirstOrDefault(item => item.ProductId == productId && item.VendorId == vendorId);
+                if (orderItem == null)
+                {
+                    return BadRequest(new { message = "Product not found or vendor is unauthorized to update this product." });
+                }
+
+                // If the item is already delivered, return an error
+                if (orderItem.IsDelivered)
+                {
+                    return BadRequest(new { message = "Product has already been marked as delivered." });
+                }
+
+                // Mark the product as delivered
+                orderItem.IsDelivered = true;
+
+                // Check if all items have been delivered
+                bool allItemsDelivered = order.OrderItems.All(item => item.IsDelivered);
+
+                // Check if some items are delivered
+                bool someItemsDelivered = order.OrderItems.Any(item => item.IsDelivered);
+
+                // Update the order status based on delivery status of all items
+                if (allItemsDelivered)
+                {
+                    order.Status = 2; // Set status to 'Delivered'
+                }
+                else if (someItemsDelivered)
+                {
+                    order.Status = 1; // Set status to 'Partially Delivered'
+                }
+
+                var updatedOrder = await _orderService.UpdateOrder(orderId, order);
+
+                if (updatedOrder == null)
+                {
+                    return BadRequest(new { message = "Failed to update order status." });
+                }
+
+                return Ok(new { message = "Product marked as delivered.", order = updatedOrder });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        private void UpdateOrderStatusBasedOnItems(Order order)
+        {
+            // Check if all products in the order have been delivered
+            bool allItemsDelivered = order.OrderItems.All(item => item.IsDelivered);
+
+            // If all items are delivered, mark the order as "Delivered"
+            if (allItemsDelivered)
+            {
+                order.Status = 2; // Delivered
+            }
+            else if (order.OrderItems.Any(item => item.IsDelivered))
+            {
+                // If some items are delivered, mark the order as "Partially Delivered"
+                order.Status = 1; // Partially Delivered
+            }
+            else
+            {
+                // If no items are delivered, keep the order as "Pending"
+                order.Status = 0; // Pending
+            }
+        }
+
+
+        [HttpGet("vendor/{vendorId}")]
+        public async Task<IActionResult> GetOrdersByVendorId(string vendorId)
+        {
+            try
+            {
+                var orders = await _orderService.GetOrdersByVendorId(vendorId);
+
+                if (orders == null || !orders.Any())
+                {
+                    return NotFound(new { message = "No orders found for this vendor." });
+                }
+
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+
         }
     }
 }

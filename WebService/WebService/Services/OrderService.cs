@@ -93,5 +93,12 @@ namespace WebService.Services
             var filter = Builders<Order>.Filter.Where(o => o.IsCancellationRequested && o.IsCancellationApproved);
             return await _orderCollection.Find(filter).ToListAsync();
         }
+
+        public async Task<List<Order>> GetOrdersByVendorId(string vendorId)
+        {
+            // Filter orders where any of the OrderItems have the given VendorId
+            var filter = Builders<Order>.Filter.ElemMatch(order => order.OrderItems, item => item.VendorId == vendorId);
+            return await _orderCollection.Find(filter).ToListAsync();
+        }
     }
 }
