@@ -65,7 +65,36 @@ namespace WebService.Controllers
             {
                 return NotFound(new { message = "Order not found" });
             }
-            return Ok(order);
+
+            return Ok(new
+            {
+                order.Id,
+                order.CustomerId,
+                CustomerFirstName = order.CustomerFirstName,
+                CustomerLastName = order.CustomerLastName,
+                order.Date,
+                order.TotalPrice,
+                order.Status,
+                OrderItems = order.OrderItems.Select(i => new
+                {
+                    ProductId = i.ProductId,
+                    ProductName = i.ProductName,
+                    VendorId = i.VendorId,
+                    Quantity = i.Quantity,
+                    UnitPrice = i.UnitPrice,
+                    Total = i.Total,
+                    IsDelivered = i.IsDelivered
+                }),
+                order.OrderItemCount,
+                order.IsCancellationRequested,
+                order.CancellationNote,
+                order.IsCancellationApproved,
+                order.Recipient_Name,
+                order.Recipient_Email,
+                order.Recipient_Contact,
+                order.Recipient_Address
+            });
+
         }
 
 
@@ -348,13 +377,27 @@ namespace WebService.Controllers
                     return NotFound(new { message = "No orders found for this vendor." });
                 }
 
-                return Ok(orders);
+                return Ok(orders.Select(order => new
+                {
+                    order.Id,
+                    order.CustomerId,
+                    order.CustomerFirstName,
+                    order.CustomerLastName,
+                    order.Date,
+                    order.TotalPrice,
+                    order.Status,
+                    order.OrderItems,
+                    order.OrderItemCount,
+                    order.IsCancellationRequested,
+                    order.CancellationNote,
+                    order.IsCancellationApproved
+                }));
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
-
         }
+
     }
 }
