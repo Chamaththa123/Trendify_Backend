@@ -31,6 +31,23 @@ namespace WebService.Models
         public bool IsCancellationRequested { get; set; } = false;
         public string CancellationNote { get; set; }
         public bool IsCancellationApproved { get; set; } = false;
+
+        [Required]
+        public string Recipient_Name        { get; set; }
+
+        [Required]
+        public string Recipient_Email { get; set; }
+
+        [Required]
+        public string Recipient_Contact { get; set; }
+
+        [Required]
+        public string Recipient_Address { get; set; }
+
+        [BsonIgnore]
+        public string? CustomerFirstName { get; set; }
+        [BsonIgnore]
+        public string? CustomerLastName { get; set; }
     }
 
     public class OrderItem
@@ -38,6 +55,9 @@ namespace WebService.Models
         [BsonRepresentation(BsonType.ObjectId)]
         [Required]
         public string ProductId { get; set; }
+
+        [BsonIgnore]
+        public string? ProductName { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string VendorId { get; set; }
@@ -53,5 +73,6 @@ namespace WebService.Models
 
         [Required]
         public bool IsDelivered { get; set; } = false;
+
     }
 }

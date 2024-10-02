@@ -10,12 +10,14 @@ namespace WebService.Services
     {
         private readonly IMongoCollection<Order> _orderCollection;
         private readonly IMongoCollection<Product> _productCollection;
+        private readonly IMongoCollection<User> _userCollection;
 
         public OrderService(IOptions<MongoDBSettings> mongoDBSettings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(mongoDBSettings.Value.DatabaseName);
             _orderCollection = database.GetCollection<Order>("order");
             _productCollection = database.GetCollection<Product>("product");
+            _userCollection = database.GetCollection<User>("user");
         }
 
         // Create a new order
@@ -28,13 +30,51 @@ namespace WebService.Services
         // Get all orders
         public async Task<List<Order>> GetOrders()
         {
-            return await _orderCollection.Find(_ => true).ToListAsync();
+            var orders = await _orderCollection.Find(_ => true).ToListAsync();
+
+            foreach (var order in orders)
+            {
+                var customer = await _userCollection.Find(c => c.Id == order.CustomerId).FirstOrDefaultAsync();
+                if (customer != null)
+                {
+                    order.CustomerFirstName = customer.First_Name;
+                    order.CustomerLastName = customer.Last_Name;
+                }
+            }
+
+            return orders;
         }
 
         // Get order by ID
         public async Task<Order?> GetOrderById(string id)
         {
-            return await _orderCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            var order = await _orderCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            if (order != null)
+            {
+                var customer = await _userCollection.Find(x => x.Id == order.CustomerId).FirstOrDefaultAsync();
+                if (customer != null)
+                {
+                    order.CustomerFirstName = customer.First_Name;
+                    order.CustomerLastName = customer.Last_Name;
+                }
+
+                foreach (var orderItem in order.OrderItems)
+                {
+                    var product = await _productCollection.Find(p => p.Id == orderItem.ProductId).FirstOrDefaultAsync();
+                    if (product != null)
+                    {
+                        orderItem.ProductName = product.Name;
+                    }
+                }
+            }
+
+            return order;
         }
 
         // Update an order by ID
@@ -98,7 +138,20 @@ namespace WebService.Services
         {
             // Filter orders where any of the OrderItems have the given VendorId
             var filter = Builders<Order>.Filter.ElemMatch(order => order.OrderItems, item => item.VendorId == vendorId);
-            return await _orderCollection.Find(filter).ToListAsync();
+            var orders = await _orderCollection.Find(filter).ToListAsync();
+
+            foreach (var order in orders)
+            {
+                var customer = await _userCollection.Find(c => c.Id == order.CustomerId).FirstOrDefaultAsync();
+                if (customer != null)
+                {
+                    order.CustomerFirstName = customer.First_Name;
+                    order.CustomerLastName = customer.Last_Name;
+                }
+            }
+
+            return orders;
         }
+
     }
 }
