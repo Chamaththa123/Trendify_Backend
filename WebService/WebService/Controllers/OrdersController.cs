@@ -251,6 +251,33 @@ namespace WebService.Controllers
             }
         }
 
+        [HttpPatch("{id}/reject-cancellation")]
+        public async Task<IActionResult> RejectOrderCancellation(string id)
+        {
+            try
+            {
+                var order = await _orderService.GetOrderById(id);
+                if (order == null)
+                {
+                    return NotFound(new { message = "Order not found" });
+                }
+
+                // Ensure a cancellation was requested
+                if (!order.IsCancellationRequested)
+                {
+                    return BadRequest(new { message = "No cancellation request found." });
+                }
+
+                // Approve the cancellation
+                var updatedOrder = await _orderService.RejectOrderCancellation(id);
+                return Ok(new { message = "Order cancellation approved successfully.", order = updatedOrder });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         // Get all orders where cancellation has been requested but not yet approved
         [HttpGet("cancel-requests")]
         //[Authorize(Roles = "Admin")]

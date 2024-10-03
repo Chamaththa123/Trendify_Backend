@@ -10,6 +10,7 @@ namespace WebService.Interfaces
         Task<Order?> UpdateOrder(string id, Order updatedOrder);
         Task<Order?> RequestOrderCancellation(string id, string cancellationNote);
         Task<Order?> ApproveOrderCancellation(string id);
+        Task<Order?> RejectOrderCancellation(string id);
         Task<List<Order>> GetCancelRequests();
         Task<List<Order>> GetApprovedCancellations();
 
