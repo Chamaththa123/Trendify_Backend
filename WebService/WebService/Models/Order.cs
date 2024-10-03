@@ -30,7 +30,7 @@ namespace WebService.Models
         // Fields for cancellation requests
         public bool IsCancellationRequested { get; set; } = false;
         public string CancellationNote { get; set; }
-        public bool IsCancellationApproved { get; set; } = false;
+        public int IsCancellationApproved { get; set; } = 0;
 
         [Required]
         public string Recipient_Name        { get; set; }

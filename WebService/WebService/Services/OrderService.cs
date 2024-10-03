@@ -109,8 +109,24 @@ namespace WebService.Services
         {
             var filter = Builders<Order>.Filter.Eq(o => o.Id, id);
             var update = Builders<Order>.Update
-                .Set(o => o.Status, 0) // Optional: Set the status to "Cancelled" if needed
-                .Set(o => o.IsCancellationApproved, true);
+                .Set(o => o.Status, 3) 
+                .Set(o => o.IsCancellationApproved, 1);
+
+            var result = await _orderCollection.FindOneAndUpdateAsync(filter, update, new FindOneAndUpdateOptions<Order>
+            {
+                ReturnDocument = ReturnDocument.After
+            });
+
+            return result;
+        }
+
+        // reject order cancellation
+        public async Task<Order?> RejectOrderCancellation(string id)
+        {
+            var filter = Builders<Order>.Filter.Eq(o => o.Id, id);
+            var update = Builders<Order>.Update
+                .Set(o => o.Status, 0)
+                .Set(o => o.IsCancellationApproved, 2);
 
             var result = await _orderCollection.FindOneAndUpdateAsync(filter, update, new FindOneAndUpdateOptions<Order>
             {
@@ -123,14 +139,14 @@ namespace WebService.Services
         // Get all orders where cancellation has been requested but not yet approved
         public async Task<List<Order>> GetCancelRequests()
         {
-            var filter = Builders<Order>.Filter.Where(o => o.IsCancellationRequested && !o.IsCancellationApproved);
+            var filter = Builders<Order>.Filter.Where(o => o.IsCancellationRequested && o.IsCancellationApproved==1);
             return await _orderCollection.Find(filter).ToListAsync();
         }
 
         // Get all orders where cancellation has been approved
         public async Task<List<Order>> GetApprovedCancellations()
         {
-            var filter = Builders<Order>.Filter.Where(o => o.IsCancellationRequested && o.IsCancellationApproved);
+            var filter = Builders<Order>.Filter.Where(o => o.IsCancellationRequested && o.IsCancellationApproved==2);
             return await _orderCollection.Find(filter).ToListAsync();
         }
 
