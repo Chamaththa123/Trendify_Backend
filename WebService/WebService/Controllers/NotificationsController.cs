@@ -1,4 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/************************************************************
+ * File:        NotificationsController.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-28
+ * Description: This file implements the NotificationsController class, 
+ *              which defines endpoints for managing notifications. 
+ *              The controller interacts with the INotificationService 
+ *              to provide notification-related functionalities via 
+ *              API endpoints.
+ ************************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using WebService.Interfaces;
 using WebService.Models;
 
@@ -15,6 +26,7 @@ namespace WebService.Controllers
             _notificationService = notificationService;
         }
 
+        /// Retrieves all notifications for a specific receiver by their ID.
         [HttpGet("{receiverId}")]
         public async Task<ActionResult<List<Notification>>> GetNotificationsByReceiverId(string receiverId)
         {

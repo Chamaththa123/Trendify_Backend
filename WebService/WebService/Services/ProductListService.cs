@@ -1,6 +1,6 @@
 ﻿/************************************************************
  * File:        ProductListService.cs
- * Author:      IT21252754 - Madhumalka K.C.S
+ * Author:      IT21210174 - Tharushi Lakshika V.G
  * Date:        2024-09-17
  * Description: This file implements the ProductListService class, 
  *              which provides CRUD operations for managing product 

@@ -1,6 +1,6 @@
 ﻿/************************************************************
  * File:        IProductListService.cs
- * Author:      IT21252754 - Madhumalka K.C.S
+ * Author:      IT21210174 - Tharushi Lakshika V.G
  * Date:        2024-09-17
  * Description: This interface defines methods for managing product 
  *              lists in the WebService. It provides CRUD operations 

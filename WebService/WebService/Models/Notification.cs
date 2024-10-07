@@ -1,9 +1,20 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        Notification.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-28
+ * Description: This file defines the Notification model class, 
+ *              which represents a notification stored in the 
+ *              MongoDB database. It includes properties such 
+ *              as receiver ID, message, and visibility flags.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebService.Models
 {
+    /// Represents a notification entity stored in MongoDB.
     public class Notification
     {
         [BsonId]
@@ -17,7 +28,9 @@ namespace WebService.Models
         public string? Message { get; set; }
 
         public bool IsVisibleToAdmin { get; set; } = false;
+
         public bool IsVisibleToCSR { get; set; } = false;
+
         public bool IsVisibleTovendor { get; set; } = false;
 
 
