@@ -89,6 +89,12 @@ namespace WebService.Services
                 {
                     product.ProductListName = productList.Name;
                 }
+
+                var vendorList = await _userCollection.Find(x => x.Id == product.Product_idVendor).FirstOrDefaultAsync();
+                if (vendorList != null)
+                {
+                    product.ProductVendorName = vendorList.First_Name + vendorList.Last_Name;
+                }
             }
 
             return product;
