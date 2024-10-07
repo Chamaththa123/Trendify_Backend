@@ -1,4 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/************************************************************
+ * File:        UsersController.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-17
+ * Description: UsersController is responsible for handling user-related operations such as registration, login,
+    password management, and retrieving user details. It interacts with IUserService and INotificationService
+    to perform the required actions.
+ ************************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,12 +28,14 @@ namespace WebService.Controllers
         private readonly INotificationService _notificationService;
         private readonly string _jwtSecret = "M2Y2YTc4ZGE0ZGI5ZDE1NjM5ZGVkMzk2MWE5NmU3YmFiOWEyOTkwM2M5NzQzZmUzZWQ4ZjllMzZjOGUyM2M="; // Should be in configuration
 
+        /// Constructor for UsersController, initializes user and notification services.
         public UsersController(IUserService userService, INotificationService notificationService)
         {
             _userService = userService;
             _notificationService = notificationService;
         }
 
+        /// Registers a new user. Sends notifications for customer role and initializes fields for specific roles.
         [HttpPost("register")]
         public async Task<IActionResult> Register(User newUser)
         {
@@ -117,6 +128,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Authenticates a user by their email and password, generates a JWT token if successful.
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
@@ -171,7 +183,7 @@ namespace WebService.Controllers
             }
         }
 
-
+        /// Authenticates a customer by their email and password, generates a JWT token if successful.
         [HttpPost("customer-login")]
         public async Task<IActionResult> CustomerLogin([FromBody] LoginRequest loginRequest)
         {
@@ -221,7 +233,7 @@ namespace WebService.Controllers
         }
 
 
-
+        /// Generates a JWT token for the authenticated user.
         private string GenerateJwtToken(User user)
         {
             try
@@ -257,6 +269,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Retrieves a list of all users.
         [HttpGet]
         public async Task<List<User>> GetAllUsers(string role)
         {
@@ -271,6 +284,7 @@ namespace WebService.Controllers
             }
         }
 
+        //change user status
         [HttpPut("status/{id}")]
         public async Task<IActionResult> ChangeState(string id)
         {
@@ -322,6 +336,7 @@ namespace WebService.Controllers
             }
         }
 
+        //get all customer list
         [HttpGet("customers")]
         public async Task<IActionResult> GetCustomers()
         {
@@ -336,6 +351,7 @@ namespace WebService.Controllers
             }
         }
 
+        //get all customer list that status == pending
         [HttpGet("customers/pending")]
         public async Task<IActionResult> GetPendingCustomers()
         {
@@ -350,6 +366,7 @@ namespace WebService.Controllers
             }
         }
 
+        //user changes password
         [HttpPut("change-password")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest changePasswordRequest)
         {
@@ -393,6 +410,8 @@ namespace WebService.Controllers
             }
         }
 
+
+        //update user details
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUserDetails(string id, [FromBody] User updatedUser)
         {
@@ -436,6 +455,8 @@ namespace WebService.Controllers
             }
         }
 
+
+        //get user details by id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(string id)
         {
