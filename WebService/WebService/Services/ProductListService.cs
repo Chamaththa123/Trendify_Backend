@@ -1,4 +1,15 @@
-﻿using Microsoft.Extensions.Options;
+﻿/************************************************************
+ * File:        ProductListService.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-17
+ * Description: This file implements the ProductListService class, 
+ *              which provides CRUD operations for managing product 
+ *              lists in MongoDB. It interacts with the Product_List 
+ *              collection and supports operations like creation, 
+ *              retrieval, update, deletion, and status change.
+ ************************************************************/
+
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using WebService.Interfaces;
 using static System.Net.Mime.MediaTypeNames;

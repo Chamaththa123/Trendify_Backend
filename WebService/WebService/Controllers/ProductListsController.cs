@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/************************************************************
+ * File:        ProductListsController.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-17
+ * Description: This file contains the ProductListsController, 
+ *              which provides API endpoints to manage product 
+ *              lists. It supports creating, retrieving, updating, 
+ *              deleting, and changing the status of product lists.
+ ************************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using WebService.Interfaces;
 using WebService.Models;
 using static System.Net.Mime.MediaTypeNames;
