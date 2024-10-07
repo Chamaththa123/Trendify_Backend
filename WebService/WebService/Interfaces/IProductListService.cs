@@ -1,4 +1,13 @@
-﻿using WebService.Models;
+﻿/************************************************************
+ * File:        IProductListService.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-17
+ * Description: This interface defines methods for managing product 
+ *              lists in the WebService. It provides CRUD operations 
+ *              and status management for product lists.
+ ************************************************************/
+
+using WebService.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WebService.Interfaces
