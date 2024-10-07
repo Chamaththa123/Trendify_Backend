@@ -34,6 +34,8 @@ namespace WebService.Controllers
                 StockStatus = p.StockStatus, // Include stock status in response
                 p.Image,
                 p.IsActive,
+                p.Product_idVendor,
+                p.ProductVendorName,
                 p.ProductListName
             }));
         }

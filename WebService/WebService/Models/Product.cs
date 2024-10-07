@@ -51,6 +51,9 @@ namespace WebService.Models
         public string? ProductListName { get; set; }
 
         [BsonIgnore]
+        public string? ProductVendorName { get; set; }
+
+        [BsonIgnore]
         public string StockStatus => Stock == 0
            ? "Out of Stock"
            : Stock <= LowStockLvl
