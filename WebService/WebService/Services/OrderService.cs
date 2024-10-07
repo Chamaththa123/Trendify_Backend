@@ -94,6 +94,7 @@ namespace WebService.Services
             var filter = Builders<Order>.Filter.Eq(o => o.Id, id);
             var update = Builders<Order>.Update
                 .Set(o => o.IsCancellationRequested, true)
+                .Set(o => o.Status, 4)
                 .Set(o => o.CancellationNote, cancellationNote);
 
             var result = await _orderCollection.FindOneAndUpdateAsync(filter, update, new FindOneAndUpdateOptions<Order>

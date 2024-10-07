@@ -1,9 +1,20 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        User.cs
+ * Author:      IT21252754 - Madhumalka K.C.S
+ * Date:        2024-09-17
+ * Description: This file defines the User class, which represents
+ *              the user model for the web service. The class includes 
+ *              properties for user information and applies MongoDB 
+ *              and data validation attributes.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebService.Models
 {
+
     public class User
     {
         [BsonId]
