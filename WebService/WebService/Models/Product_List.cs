@@ -1,6 +1,6 @@
 ﻿/************************************************************
  * File:        Product_List.cs
- * Author:      IT21252754 - Madhumalka K.C.S
+ * Author:      IT21210174 - Tharushi Lakshika V.G
  * Date:        2024-09-17
  * Description: This file defines the Product_List model used in 
  *              the WebService to represent product lists stored 
