@@ -23,5 +23,8 @@ namespace WebService.Models
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? UpdatedAt { get; set; }
+
+        [BsonIgnore]
+        public string? CustomerName { get; set; }
     }
 }
