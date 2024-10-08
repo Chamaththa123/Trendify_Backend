@@ -1,4 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/************************************************************
+ * File:        ProductsController.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-25
+ * Description: ASP.NET Core controller for managing products. 
+ *              Provides API endpoints to create, read, update, 
+ *              and delete products as well as manage stock levels.
+ ************************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using WebService.Interfaces;
 using WebService.Models;
 
@@ -13,6 +22,7 @@ namespace WebService.Controllers
         public ProductsController(IProductService productService) =>
             _productService = productService;
 
+        /// Gets all products.
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProduct()
         {
@@ -68,6 +78,7 @@ namespace WebService.Controllers
             });
         }
 
+        /// Creates a new product.
         [HttpPost]
         public async Task<IActionResult> Post(Product newProduct)
         {
@@ -75,6 +86,7 @@ namespace WebService.Controllers
             return CreatedAtAction(nameof(GetProductById), new { id = newProduct.Id }, newProduct);
         }
 
+        /// Updates an existing product by its ID.
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(string id, Product updatedProduct)
         {
@@ -92,6 +104,7 @@ namespace WebService.Controllers
             return NoContent();
         }
 
+        /// Deletes a product by its ID.
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -107,6 +120,7 @@ namespace WebService.Controllers
             return Ok(new { Message = "Product deleted successfully" });
         }
 
+        /// Changes the status of a product by its ID.
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> ChangeStatus(string id)
         {
@@ -122,6 +136,7 @@ namespace WebService.Controllers
             return NoContent();
         }
 
+        /// Updates the stock of a product based on the specified stock update information.
         [HttpPut("stocks/update/{id}")]
         public async Task<IActionResult> UpdateStock(string id, [FromBody] StockUpdate stockUpdate)
         {
@@ -146,6 +161,7 @@ namespace WebService.Controllers
             return NoContent();
         }
 
+        /// Resets the stock of a product to its initial value.
         [HttpPut("stocks/reset/{id}")]
         public async Task<IActionResult> ResetStock(string id)
         {

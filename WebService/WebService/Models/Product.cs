@@ -1,4 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        Product.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-25
+ * Description: Represents a product in the system, including
+ *              its properties, validation rules, and MongoDB
+ *              serialization attributes.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
