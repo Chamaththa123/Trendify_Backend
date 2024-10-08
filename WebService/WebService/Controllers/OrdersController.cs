@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/************************************************************
+ * File:        OrdersController.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-23
+ * Description: This controller handles API operations for orders,
+ *              including creation, updating, and management of
+ *              order status and cancellation requests. The controller
+ *              also allows vendors to mark items as delivered.
+ ************************************************************/
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebService.Interfaces;
@@ -21,6 +31,7 @@ namespace WebService.Controllers
             _productService = productService;
         }
 
+        /// Creates a new order. Sets the total price and initializes status.
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order newOrder)
         {
@@ -49,6 +60,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Retrieves all orders.
         [HttpGet]
         public async Task<IActionResult> GetOrders()
         {
@@ -137,6 +149,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Changes the status of an order (0 = Pending, 1 = Processing, 2 = Delivered).
         [HttpPatch("status/{id}")]
         public async Task<IActionResult> ChangeOrderStatus(string id, [FromBody] int newStatus)
         {
@@ -251,6 +264,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Rejects the order cancellation request.
         [HttpPatch("{id}/reject-cancellation")]
         public async Task<IActionResult> RejectOrderCancellation(string id)
         {
@@ -369,6 +383,7 @@ namespace WebService.Controllers
             }
         }
 
+        // Updates the status of each order item based on delivery status.
         private void UpdateOrderStatusBasedOnItems(Order order)
         {
             // Check if all products in the order have been delivered
@@ -391,7 +406,7 @@ namespace WebService.Controllers
             }
         }
 
-
+        //retrie orders based on vendor
         [HttpGet("vendor/{vendorId}")]
         public async Task<IActionResult> GetOrdersByVendorId(string vendorId)
         {

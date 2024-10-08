@@ -1,4 +1,16 @@
-﻿using Microsoft.Extensions.Options;
+﻿/************************************************************
+ * File:        OrderService.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-24
+ * Description: Implements the IOrderService interface for 
+ *              managing orders in the application. This 
+ *              includes creating orders, retrieving orders 
+ *              by various criteria, updating orders, and 
+ *              managing order cancellations.
+ ************************************************************/
+
+
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using WebService.Interfaces;
 using WebService.Models;
@@ -151,6 +163,7 @@ namespace WebService.Services
             return await _orderCollection.Find(filter).ToListAsync();
         }
 
+        /// Retrieves all orders associated with a specific vendor ID.
         public async Task<List<Order>> GetOrdersByVendorId(string vendorId)
         {
             // Filter orders where any of the OrderItems have the given VendorId
