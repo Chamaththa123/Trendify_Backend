@@ -1,4 +1,15 @@
-﻿using Microsoft.Extensions.Options;
+﻿/************************************************************
+ * File:        RankingCommentService.cs
+ * Author:      IT21210174 - Tharushi Lakshika V.G
+ * Date:        2024-09-22
+ * Description: Implements the IRankingComment interface for 
+ *              managing rankings and comments for vendors. 
+ *              This includes adding rankings, retrieving 
+ *              rankings and comments, and updating vendor 
+ *              average ratings based on rankings.
+ ************************************************************/
+
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using WebService.Interfaces;
 using WebService.Models;
@@ -55,6 +66,7 @@ namespace WebService.Services
             return rakings;
         }
 
+        //automatically update vendor average rating
         private async Task UpdateVendorAverageRating(string vendorId)
         {
             // Get all rankings for the specific vendor
@@ -68,11 +80,13 @@ namespace WebService.Services
             await _userCollection.UpdateOneAsync(v => v.Id == vendorId, update);
         }
 
+        //add comment for vendor
         public async Task AddCommentForVendor(Comment comment)
         {
             await _commentCollection.InsertOneAsync(comment);
         }
 
+        //edit vendor comment
         public async Task EditCommentForVendor(string commentId, string customerId, string comment)
         {
             var filter = Builders<Comment>.Filter.Where(c => c.Id == commentId && c.CustomerId == customerId);
@@ -88,6 +102,7 @@ namespace WebService.Services
             }
         }
 
+        //retrieve comments by vendor id
         public async Task<List<Comment>> GetCommentsByVendorId(string vendorId)
         {
             var comments = await _commentCollection.Find(x => x.VendorId == vendorId).ToListAsync();
