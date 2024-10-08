@@ -1,4 +1,14 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        Comment.cs
+ * Author:      IT21210174 - Tharushi Lakshika V.G
+ * Date:        2024-09-22
+ * Description: This file defines the Comment model which represents 
+ *              comments made by customers for vendors. Each comment 
+ *              includes customer and vendor IDs, comment content, 
+ *              creation and update timestamps, and optional customer name.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
 namespace WebService.Models
