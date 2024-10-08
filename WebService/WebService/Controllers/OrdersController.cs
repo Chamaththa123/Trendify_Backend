@@ -41,6 +41,9 @@ namespace WebService.Controllers
                 foreach (var item in newOrder.OrderItems)
                 {
                     item.Total = item.UnitPrice * item.Quantity;
+
+                    //reduce product quantity from the stock
+                    await _productService.ReduceStockById(item.ProductId, item.Quantity);
                 }
 
                 newOrder.TotalPrice = newOrder.OrderItems.Sum(i => i.Total);
