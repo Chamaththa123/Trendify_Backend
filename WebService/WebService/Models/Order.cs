@@ -1,4 +1,15 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        Order.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-23
+ * Description: Defines the Order and OrderItem models. The Order 
+ *              model represents an order placed by a customer 
+ *              with details about order items, recipient 
+ *              information, and status. The OrderItem model 
+ *              represents an individual product within the order.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
