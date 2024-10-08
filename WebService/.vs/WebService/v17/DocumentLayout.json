@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "E:\\My Project\\EAD_Project\\WebService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\product_list.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\product_list.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,41 +26,41 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "WebService\\Services\\ProductService.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\ProductService.cs",
-              "RelativeToolTip": "WebService\\Services\\ProductService.cs",
-              "ViewState": "AQIAAG0AAAAAAAAAAAArwF8AAAAtAAAA",
+              "DocumentIndex": 1,
+              "Title": "Product_List.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product_List.cs",
+              "RelativeDocumentMoniker": "WebService\\Models\\Product_List.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product_List.cs",
+              "RelativeToolTip": "WebService\\Models\\Product_List.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAkwBwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T16:15:20.09Z",
+              "WhenOpened": "2024-10-07T19:23:01.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Product.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "WebService\\Models\\Product.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
-              "RelativeToolTip": "WebService\\Models\\Product.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAABUAAAAnAAAA",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\User.cs",
+              "RelativeDocumentMoniker": "WebService\\Models\\User.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\User.cs",
+              "RelativeToolTip": "WebService\\Models\\User.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAqwDEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T16:13:44.626Z",
+              "WhenOpened": "2024-10-07T19:18:05.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "WebService\\Controllers\\ProductsController.cs",
-              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\ProductsController.cs*",
-              "RelativeToolTip": "WebService\\Controllers\\ProductsController.cs*",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEAAAAApAAAA",
+              "Title": "Product.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WebService\\Models\\Product.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Product.cs",
+              "RelativeToolTip": "WebService\\Models\\Product.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAkwD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T15:54:14.257Z",
+              "WhenOpened": "2024-10-07T16:13:44.626Z",
               "EditorCaption": ""
             }
           ]

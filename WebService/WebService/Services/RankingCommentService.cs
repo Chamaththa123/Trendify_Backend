@@ -37,7 +37,22 @@ namespace WebService.Services
         //get all rankings for vendor
         public async Task<List<Ranking>> GetRankingForVendor(string id)
         {
-            return await _rankingCollection.Find(x => x.VendorId == id).ToListAsync();
+            var rakings = await _rankingCollection.Find(x => x.VendorId == id).ToListAsync();
+
+            // Fetch all product lists
+            var customerLists = await _userCollection.Find(_ => true).ToListAsync();
+
+            var customerDictionary = customerLists.ToDictionary(pl => pl.Id);
+
+            foreach (var ranking in rakings)
+            {
+                if (customerDictionary.TryGetValue(ranking.CustomerId ?? string.Empty, out var customer))
+                {
+                    ranking.CustomerName = customer.First_Name + " " + customer.Last_Name;
+                }
+            }
+
+            return rakings;
         }
 
         private async Task UpdateVendorAverageRating(string vendorId)
@@ -75,8 +90,22 @@ namespace WebService.Services
 
         public async Task<List<Comment>> GetCommentsByVendorId(string vendorId)
         {
-            var filter = Builders<Comment>.Filter.Eq(c => c.VendorId, vendorId);
-            return await _commentCollection.Find(filter).ToListAsync();
+            var comments = await _commentCollection.Find(x => x.VendorId == vendorId).ToListAsync();
+
+            // Fetch all customer lists
+            var customerLists = await _userCollection.Find(_ => true).ToListAsync();
+
+            var customerDictionary = customerLists.ToDictionary(pl => pl.Id);
+
+            foreach (var comment in comments)
+            {
+                if (customerDictionary.TryGetValue(comment.CustomerId ?? string.Empty, out var customer))
+                {
+                    comment.CustomerName = customer.First_Name +" "+ customer.Last_Name;
+                }
+            }
+
+            return comments;
         }
     }
 }

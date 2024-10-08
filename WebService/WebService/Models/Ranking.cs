@@ -17,5 +17,11 @@ namespace WebService.Models
 
         public int ranking { get; set; }
 
+        [BsonIgnore]
+        public string? CustomerName { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
     }
 }

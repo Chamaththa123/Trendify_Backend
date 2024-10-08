@@ -50,22 +50,30 @@ namespace WebService.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<List<Ranking>> GetRankingForVendor(string id)
+        [HttpGet("vendorRatings/{id}")]
+        public async Task<IActionResult> GetRankingForVendor(string id)
         {
             try
             {
                 var ranking = await _rankingCommnetService.GetRankingForVendor(id);
 
-                return ranking;
+                return Ok(ranking.Select(r => new
+                {
+                    r.Id,
+                    r.CustomerId,
+                    r.VendorId,
+                    r.ranking,
+                    r.CustomerName
+                }));
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("Fail to get all rankings for the specific vendor", ex);
+                return StatusCode(500, new { Message = "Fail to get all rankings for the specific vendor", Details = ex.Message });
             }
         }
 
-         [HttpPost("addComment")]
+
+        [HttpPost("addComment")]
         public async Task<IActionResult> AddCommentForVendor([FromBody] Comment comment)
         {
             try
@@ -127,7 +135,15 @@ namespace WebService.Controllers
 
                 var comments = await _rankingCommnetService.GetCommentsByVendorId(vendorId);
 
-                return Ok(comments);
+                return Ok(comments.Select(c => new
+                {
+                    c.Id,
+                    c.CustomerId,
+                    c.VendorId,
+                    c.comment,
+                    c.CreatedAt,
+                    c.CustomerName
+                }));
             }
             catch (Exception ex)
             {

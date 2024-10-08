@@ -69,7 +69,7 @@ namespace WebService.Services
 
                 if (vendorDictionary.TryGetValue(product.Product_idVendor ?? string.Empty, out var user))
                 {
-                    product.ProductVendorName = user.First_Name + user.Last_Name;
+                    product.ProductVendorName = user.First_Name + " " + user.Last_Name;
                 }
             }
 
@@ -93,7 +93,7 @@ namespace WebService.Services
                 var vendorList = await _userCollection.Find(x => x.Id == product.Product_idVendor).FirstOrDefaultAsync();
                 if (vendorList != null)
                 {
-                    product.ProductVendorName = vendorList.First_Name + vendorList.Last_Name;
+                    product.ProductVendorName = vendorList.First_Name + " " + vendorList.Last_Name;
                 }
             }
 
