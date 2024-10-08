@@ -35,6 +35,9 @@ namespace WebService.Interfaces
         //activate or deactivate product
         Task ChangeProductStatus(string id);
 
+        // Update stock for a specific product by reducing a quantity
+        Task ReduceStockById(string productId, int quantity);
+
         // Update stock by adding new  stock values
         Task UpdateStock(string id, int additionalStock);
 
