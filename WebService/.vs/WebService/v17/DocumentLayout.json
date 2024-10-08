@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\My Project\\EAD_Project\\WebService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\rankingcommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\rankingcommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\controllers\\rankingcommentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\controllers\\rankingcommentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|e:\\my project\\ead_project\\webservice\\webservice\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA99BB37-4A6E-4DF5-9448-E5D01F8572BB}|WebService\\WebService.csproj|solutionrelative:webservice\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,24 +34,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RankingCommentsController.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\RankingCommentsController.cs",
+              "RelativeDocumentMoniker": "WebService\\Controllers\\RankingCommentsController.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\RankingCommentsController.cs",
+              "RelativeToolTip": "WebService\\Controllers\\RankingCommentsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T10:18:44.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RankingCommentService.cs",
+              "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\RankingCommentService.cs",
+              "RelativeDocumentMoniker": "WebService\\Services\\RankingCommentService.cs",
+              "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\RankingCommentService.cs",
+              "RelativeToolTip": "WebService\\Services\\RankingCommentService.cs",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAAAGgAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T10:17:38.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "OrderService.cs",
               "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\OrderService.cs",
               "RelativeDocumentMoniker": "WebService\\Services\\OrderService.cs",
               "ToolTip": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Services\\OrderService.cs",
               "RelativeToolTip": "WebService\\Services\\OrderService.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAKUAAABGAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKUAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T09:15:29.449Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Order.cs",
               "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Models\\Order.cs",
               "RelativeDocumentMoniker": "WebService\\Models\\Order.cs",
@@ -56,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "IOrderService.cs",
               "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Interfaces\\IOrderService.cs",
               "RelativeDocumentMoniker": "WebService\\Interfaces\\IOrderService.cs",
@@ -69,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "OrdersController.cs",
               "DocumentMoniker": "E:\\My Project\\EAD_Project\\WebService\\WebService\\Controllers\\OrdersController.cs",
               "RelativeDocumentMoniker": "WebService\\Controllers\\OrdersController.cs",
