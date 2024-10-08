@@ -1,4 +1,14 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/************************************************************
+ * File:        Ranking.cs
+ * Author:      IT21210174 - Tharushi Lakshika V.G
+ * Date:        2024-09-22
+ * Description: This file defines the Ranking model representing 
+ *              customer rankings for vendors. Each ranking includes
+ *              customer and vendor IDs, the rank value, creation 
+ *              timestamp, and optional customer name.
+ ************************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
 namespace WebService.Models

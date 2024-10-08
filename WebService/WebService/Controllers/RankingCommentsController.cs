@@ -1,4 +1,15 @@
-﻿using DnsClient;
+﻿/************************************************************
+ * File:        RankingCommentsController.cs
+ * Author:      IT21210174 - Tharushi Lakshika V.G
+ * Date:        2024-09-22
+ * Description: This file implements the RankingCommentsController class,
+ *              which provides API endpoints for managing rankings and 
+ *              comments related to vendors. It interacts with the 
+ *              IRankingComment service and User collection to manage 
+ *              vendor rankings and comments.
+ ************************************************************/
+
+using DnsClient;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using WebService.Interfaces;
@@ -19,6 +30,8 @@ namespace WebService.Controllers
             _rankingCommnetService = rankingCommentService;
             _userCollection = userCollection;
         }
+
+        /// Adds a new ranking for a vendor.
 
         [HttpPost]
         public async Task<IActionResult> AddRankForVendor(Ranking ranking)
@@ -50,6 +63,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Retrieves the ranking for a specific vendor.
         [HttpGet("vendorRatings/{id}")]
         public async Task<IActionResult> GetRankingForVendor(string id)
         {
@@ -72,7 +86,7 @@ namespace WebService.Controllers
             }
         }
 
-
+        // Adds a new comment for a vendor.
         [HttpPost("addComment")]
         public async Task<IActionResult> AddCommentForVendor([FromBody] Comment comment)
         {
@@ -120,6 +134,7 @@ namespace WebService.Controllers
             }
         }
 
+        /// Retrieves comments for a specific vendor.
         [HttpGet("vendorComments/{vendorId}")]
         public async Task<IActionResult> GetCommentsByVendorId(string vendorId)
         {
