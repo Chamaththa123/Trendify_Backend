@@ -1,4 +1,14 @@
-﻿using WebService.Models;
+﻿/************************************************************
+ * File:        IProductService.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-25
+ * Description: Interface for managing products in the 
+ *              application. Defines methods for performing 
+ *              CRUD operations on products as well as 
+ *              managing stock levels.
+ ************************************************************/
+
+using WebService.Models;
 
 namespace WebService.Interfaces
 {

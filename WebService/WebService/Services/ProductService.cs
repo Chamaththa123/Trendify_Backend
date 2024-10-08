@@ -1,4 +1,13 @@
-﻿using Microsoft.Extensions.Options;
+﻿/************************************************************
+ * File:        ProductService.cs
+ * Author:      IT21252754 Madhumalka K.C.S
+ * Date:        2024-09-25
+ * Description: Provides implementations for the IProductService
+ *              interface, managing CRUD operations for products
+ *              in the MongoDB database.
+ ************************************************************/
+
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using WebService.Interfaces;
 using WebService.Models;
