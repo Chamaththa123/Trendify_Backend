@@ -23,7 +23,9 @@ namespace WebService.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         [Required]
-        public string CustomerId { get; set; } 
+        public string CustomerId { get; set; }
+
+        public string OrderCode { get; set; }
 
         [Required]
         public DateTime Date { get; set; } 

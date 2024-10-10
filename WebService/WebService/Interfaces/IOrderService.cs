@@ -43,5 +43,12 @@ namespace WebService.Interfaces
 
         /// Retrieves all orders associated with a specific vendor by vendor ID.
         Task<List<Order>> GetOrdersByVendorId(string vendorId);
+
+        /// Retrieves all orders associated with a specific customer by customer ID.
+        Task<List<Order>> GetOrdersByCustromerId(string customerId);
+
+        // Retrieves the last order based on the OrderCode or ID.
+        Task<Order?> GetLastOrder();
+
     }
 }
