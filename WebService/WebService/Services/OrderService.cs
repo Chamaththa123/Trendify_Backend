@@ -183,5 +183,24 @@ namespace WebService.Services
             return orders;
         }
 
+        /// Retrieves all orders associated with a specific customer ID.
+        public async Task<List<Order>> GetOrdersByCustromerId(string customerId)
+        {
+            // Filter orders by CustomerId
+            var filter = Builders<Order>.Filter.Eq(order => order.CustomerId, customerId);
+            var orders = await _orderCollection.Find(filter).ToListAsync();
+
+            return orders;
+        }
+
+        // Get last order
+        public async Task<Order?> GetLastOrder()
+        {
+            return await _orderCollection
+                .Find(_ => true)
+                .SortByDescending(o => o.OrderCode)
+                .FirstOrDefaultAsync();
+        }
+
     }
 }

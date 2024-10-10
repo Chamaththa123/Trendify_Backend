@@ -197,7 +197,14 @@ namespace WebService.Services
             }
 
             product.Stock = 0;
+
+            var notification = new Notification
+            {
+                ReceiverId = product.Product_idVendor,
+                Message = $"Product '{product.Name}' stock has been reset. New stock level: {product.Stock}."
+            };
             await _productCollection.ReplaceOneAsync(x => x.Id == id, product);
+            await _notificationService.CreateNotification(notification);
         }
     }
 }

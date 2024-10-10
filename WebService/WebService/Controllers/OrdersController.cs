@@ -24,11 +24,15 @@ namespace WebService.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IProductService _productService;
+        private readonly INotificationService _notificationService;
+        private readonly IUserService _userService;
 
-        public OrdersController(IOrderService orderService, IProductService productService)
+        public OrdersController(IOrderService orderService, IProductService productService, INotificationService notificationService, IUserService userService)
         {
             _orderService = orderService;
             _productService = productService;
+            _notificationService = notificationService;
+            _userService = userService;
         }
 
         /// Creates a new order. Sets the total price and initializes status.
@@ -37,12 +41,27 @@ namespace WebService.Controllers
         {
             try
             {
+                // Generate OrderCode
+                var lastOrder = await _orderService.GetLastOrder();
+                if (lastOrder != null && !string.IsNullOrEmpty(lastOrder.OrderCode))
+                {
+                    // Extract numeric part of the last OrderCode
+                    var lastOrderCodeNumeric = int.Parse(lastOrder.OrderCode.Replace("ORD#", ""));
+                    // Increment the numeric part to generate a new OrderCode
+                    newOrder.OrderCode = $"ORD#{lastOrderCodeNumeric + 1}";
+                }
+                else
+                {
+                    // If no previous order, start with ORD#1000
+                    newOrder.OrderCode = "ORD#1000";
+                }
+
                 // Set the total price for each item and the order
                 foreach (var item in newOrder.OrderItems)
                 {
                     item.Total = item.UnitPrice * item.Quantity;
 
-                    //reduce product quantity from the stock
+                    // Reduce product quantity from the stock
                     await _productService.ReduceStockById(item.ProductId, item.Quantity);
                 }
 
@@ -62,6 +81,7 @@ namespace WebService.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         /// Retrieves all orders.
         [HttpGet]
@@ -88,6 +108,7 @@ namespace WebService.Controllers
                 CustomerFirstName = order.CustomerFirstName,
                 CustomerLastName = order.CustomerLastName,
                 order.Date,
+                order.OrderCode,
                 order.TotalPrice,
                 order.Status,
                 OrderItems = order.OrderItems.Select(i => new
@@ -231,6 +252,16 @@ namespace WebService.Controllers
 
                 // Request cancellation
                 var updatedOrder = await _orderService.RequestOrderCancellation(id, cancellationNote);
+
+                var customer = await _userService.GetUserById(order.CustomerId);
+
+                var notification = new Notification
+                {
+                    IsVisibleToCSR = true,
+                    Message = $"Customer :'{customer?.First_Name} {customer?.Last_Name}' has requested to cancel Order ID: {order.Id} placed on {order.Date}. Please review the request and take appropriate action."
+                };
+                await _notificationService.CreateNotification(notification);
+
                 return Ok(new { message = "Cancellation requested successfully.", order = updatedOrder });
             }
             catch (Exception ex)
@@ -287,7 +318,7 @@ namespace WebService.Controllers
 
                 // Approve the cancellation
                 var updatedOrder = await _orderService.RejectOrderCancellation(id);
-                return Ok(new { message = "Order cancellation approved successfully.", order = updatedOrder });
+                return Ok(new { message = "Order cancellation reject successfully.", order = updatedOrder });
             }
             catch (Exception ex)
             {
@@ -365,6 +396,13 @@ namespace WebService.Controllers
                 if (allItemsDelivered)
                 {
                     order.Status = 2; // Set status to 'Delivered'
+
+                    var notification = new Notification
+                    {
+                        ReceiverId = order.CustomerId,
+                        Message = $"Your order '{order.OrderCode}' has been delivered! Thank you for shopping with us."
+                    };
+                    await _notificationService.CreateNotification(notification);
                 }
                 else if (someItemsDelivered)
                 {
@@ -429,6 +467,7 @@ namespace WebService.Controllers
                     order.CustomerFirstName,
                     order.CustomerLastName,
                     order.Date,
+                    order.OrderCode,
                     order.TotalPrice,
                     order.Status,
                     order.OrderItems,
@@ -444,5 +483,25 @@ namespace WebService.Controllers
             }
         }
 
+        //retrie orders based on customer
+        [HttpGet("customer/{customerId}")]
+        public async Task<IActionResult> GetOrdersByCustomerId(string customerId)
+        {
+            try
+            {
+                var orders = await _orderService.GetOrdersByCustromerId(customerId);
+
+                if (orders == null || !orders.Any())
+                {
+                    return NotFound(new { message = "No orders found for this customer." });
+                }
+
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
