@@ -37,5 +37,23 @@ namespace WebService.Services
         {
             return await _notificationCollection.Find(n => n.ReceiverId == receiverId).ToListAsync();
         }
+
+        /// Retrieves all notifications for admin.
+        public async Task<List<Notification>> GetNotificationsByAdminAndCSR(string role)
+        {
+            if (role == "2")
+            {
+                return await _notificationCollection.Find(n => n.IsVisibleToCSR == true).ToListAsync();
+            }
+            else if (role == "1") 
+            {
+
+                return await _notificationCollection.Find(n => n.IsVisibleToAdmin == true).ToListAsync();
+            }
+            else
+            {
+                throw new ArgumentException("Invalid role provided. No notifications available.");
+            }
+        }
     }
 }

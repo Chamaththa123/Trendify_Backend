@@ -38,5 +38,18 @@ namespace WebService.Controllers
 
             return Ok(notifications);
         }
+
+        /// Retrieves all notifications for admin and csr.
+        [HttpGet("/admin-csr/{role}")]
+        public async Task<ActionResult<List<Notification>>> GetNotificationsByAdminAndCSR(string role)
+        {
+            var notifications = await _notificationService.GetNotificationsByAdminAndCSR(role);
+            if (notifications == null || notifications.Count == 0)
+            {
+                return NotFound(new { Message = "No notifications found for this receiver." });
+            }
+
+            return Ok(notifications);
+        }
     }
 }
