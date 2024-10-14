@@ -20,5 +20,9 @@ namespace WebService.Interfaces
 
         /// Retrieves a list of notifications by the receiver's ID.
         Task<List<Notification>> GetNotificationsByReceiverId(string receiverId);
+
+        /// Retrieves a list of notifications by the admin role.
+        Task<List<Notification>> GetNotificationsByAdminAndCSR(string role);
+
     }
 }
