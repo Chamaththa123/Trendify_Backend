@@ -78,6 +78,34 @@ namespace WebService.Controllers
             }));
         }
 
+        /// Gets all active products.
+        [HttpGet("vendorId/{id}")]
+        public async Task<ActionResult<List<Product>>> GetProductByVendorId(string id)
+        {
+            var products = await _productService.GetProductByVendorId(id);
+
+            if (products == null || products.Count == 0)
+            {
+                return NotFound(new { Message = "No products found." });
+            }
+
+            return Ok(products.Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.Price,
+                p.Description,
+                p.Stock,
+                p.LowStockLvl,
+                StockStatus = p.StockStatus, // Include stock status in response
+                p.Image,
+                p.IsActive,
+                p.Product_idVendor,
+                p.ProductVendorName,
+                p.ProductListName
+            }));
+        }
+
         // Get product by ID with stock status
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductById(string id)

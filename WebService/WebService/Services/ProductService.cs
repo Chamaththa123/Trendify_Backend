@@ -120,6 +120,39 @@ namespace WebService.Services
             return products;
         }
 
+        //get all product by venodr id
+        public async Task<List<Product>> GetProductByVendorId(string id)
+        {
+            // Fetch all products
+            var products = await _productCollection.Find(p => p.Product_idVendor == id).ToListAsync();
+
+            // Fetch all product lists
+            var productLists = await _productListCollection.Find(_ => true).ToListAsync();
+
+            // Fetch all product lists
+            var venodrs = await _userCollection.Find(_ => true).ToListAsync();
+
+            // Join products with product lists to get product list names
+            var productListDictionary = productLists.ToDictionary(pl => pl.Id);
+
+            var vendorDictionary = venodrs.ToDictionary(pl => pl.Id);
+
+            foreach (var product in products)
+            {
+                if (productListDictionary.TryGetValue(product.Product_idProductList ?? string.Empty, out var productList))
+                {
+                    product.ProductListName = productList.Name;
+                }
+
+                if (vendorDictionary.TryGetValue(product.Product_idVendor ?? string.Empty, out var user))
+                {
+                    product.ProductVendorName = user.First_Name + " " + user.Last_Name;
+                }
+            }
+
+            return products;
+        }
+
         //get specific product
         public async Task<Product?> GetProductById(string id)
         {
