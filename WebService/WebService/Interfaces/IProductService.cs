@@ -20,6 +20,9 @@ namespace WebService.Interfaces
         //get all product 
         Task<List<Product>> GetProduct();
 
+        //get all product by vendor id
+        Task<List<Product>> GetProductByVendorId(string id);
+
         //get all active product 
         Task<List<Product>> GetActiveProduct();
 
