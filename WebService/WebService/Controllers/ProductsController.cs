@@ -171,9 +171,23 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            await _productService.RemoveProduct(id);
+            try
+            {
+                await _productService.RemoveProduct(id);
+                return Ok(new { Message = "Product deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                // Check if the exception message is related to pending orders
+                if (ex.Message.Contains("pending orders"))
+                {
+                    // Return 409 Conflict with a proper message
+                    return Conflict(new { Message = ex.Message });
+                }
 
-            return Ok(new { Message = "Product deleted successfully" });
+                // For other exceptions, return a generic server error
+                return StatusCode(500, new { Message = "An error occurred while deleting the product." });
+            }
         }
 
         /// Changes the status of a product by its ID.
