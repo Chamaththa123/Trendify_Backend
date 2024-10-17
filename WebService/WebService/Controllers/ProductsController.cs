@@ -130,7 +130,8 @@ namespace WebService.Controllers
                 product.IsActive,
                 product.Product_idVendor,
                 product.ProductListName,
-                product.ProductVendorName
+                product.ProductVendorName,
+                product.Product_idProductList
             });
         }
 
